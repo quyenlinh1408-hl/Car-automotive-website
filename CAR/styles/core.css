@@ -62,6 +62,7 @@ header {
     width: 100%;
     z-index: 1000;
     border-bottom: 1px solid rgba(199, 166, 90, 0.32);
+    -webkit-backdrop-filter: blur(7px);
     backdrop-filter: blur(7px);
 }
 
@@ -251,6 +252,7 @@ nav ul li a:hover { color: var(--luxury-gold-soft); }
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 18px;
     padding: 24px;
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
 }
@@ -974,6 +976,7 @@ nav ul li a:hover { color: var(--luxury-gold-soft); }
     gap: 12px;
     padding: 12px 14px;
     box-shadow: 0 16px 34px rgba(0, 0, 0, 0.38);
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
 }
 
@@ -1034,7 +1037,8 @@ nav ul li a:hover { color: var(--luxury-gold-soft); }
 .compare-modal-card {
     width: min(100%, 980px);
     max-height: 84vh;
-    overflow: auto;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     background: var(--compare-bg);
     border-radius: var(--compare-radius);
     padding: 20px;
@@ -1365,7 +1369,8 @@ nav ul li a:hover { color: var(--luxury-gold-soft); }
 }
 
 .service-details li {
-    padding: 8px 0;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     padding-left: 25px;
     position: relative;
     font-size: 13px;
@@ -1420,6 +1425,7 @@ nav ul li a:hover { color: var(--luxury-gold-soft); }
     padding: 18px;
     background: linear-gradient(150deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.62));
     border: 1px solid rgba(255, 255, 255, 0.72);
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     box-shadow: 0 18px 34px rgba(13, 13, 13, 0.14);
 }
@@ -1680,6 +1686,7 @@ footer p {
     height: 350px;
     border: none;
     border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 /* ===== MODAL ===== */
