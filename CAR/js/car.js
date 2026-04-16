@@ -54,6 +54,18 @@
         ford: 'Ford',
         mazda: 'Mazda'
     };
+    const carCatalog = [
+        { name: 'Mazda 2 Hatchback', image: 'mazda-2-hatchback.jpg', image_url: './images/cars/mazda-2-hatchback.jpg', category: 'Xe hạng B', line: 'mazda', cardClass: 'sedan' },
+        { name: 'Lamborghini Huracan', image: 'lamborghini-huracan.jpg', image_url: './images/cars/lamborghini-huracan.jpg', category: 'Siêu xe thể thao', line: 'porsche', cardClass: 'sport' },
+        { name: 'Tesla Model 3', image: 'tesla-model-3.jpg', image_url: './images/cars/tesla-model-3.jpg', category: 'Xe điện cao cấp', line: 'lexus', cardClass: 'electric' },
+        { name: 'Lamborghini Aventador', image: 'lamborghini-aventador.jpg', image_url: './images/cars/lamborghini-aventador.jpg', category: 'Siêu xe thể thao', line: 'porsche', cardClass: 'sport' },
+        { name: 'Ferrari 458 Italia', image: 'ferrari-458-italia.jpg', image_url: './images/cars/ferrari-458-italia.jpg', category: 'Siêu xe thể thao', line: 'porsche', cardClass: 'sport' },
+        { name: 'Ford Mustang', image: 'ford-mustang.jpg', image_url: './images/cars/ford-mustang.jpg', category: 'Xe cơ bắp Mỹ', line: 'ford', cardClass: 'sport' },
+        { name: 'Ford Expedition', image: 'ford-expedition.jpg', image_url: './images/cars/ford-expedition.jpg', category: 'SUV hạng Full-size', line: 'ford', cardClass: 'suv' },
+        { name: 'Mercedes-Benz S-Class', image: 'mercedes-s-class.jpg', image_url: './images/cars/mercedes-s-class.jpg', category: 'Sedan hạng sang', line: 'mercedes', cardClass: 'sedan' },
+        { name: 'BMW M8 Competition', image: 'bmw-m8-competition.jpg', image_url: './images/cars/bmw-m8-competition.jpg', category: 'Xe thể thao hạng sang', line: 'bmw', cardClass: 'sport' },
+        { name: 'Audi Q7', image: 'audi-q7.jpg', image_url: './images/cars/audi-q7.jpg', category: 'SUV hạng sang', line: 'audi', cardClass: 'suv' }
+    ];
     const paintPresets = [
         { name: 'Nguyên bản', color: 'transparent', opacity: '0' },
         { name: 'Đen bóng', color: '#17181a', opacity: '0.42' },
@@ -776,6 +788,29 @@
         });
     }
 
+    function syncCarCardsWithCatalog() {
+        if (carCards.length === 0) return;
+
+        carCards.forEach((card, index) => {
+            const item = carCatalog[index];
+            if (!item) return;
+
+            const titleEl = card.querySelector('h3');
+            const tagEl = card.querySelector('.car-tag');
+            const imgEl = card.querySelector('.car-img');
+
+            if (titleEl) titleEl.innerText = item.name;
+            if (tagEl) tagEl.innerText = item.category;
+            if (imgEl) imgEl.dataset.bg = item.image_url;
+
+            card.dataset.line = item.line;
+            card.dataset.category = item.category;
+
+            card.classList.remove('sedan', 'sport', 'suv', 'hybrid', 'electric');
+            card.classList.add(item.cardClass);
+        });
+    }
+
     if (filterLine) {
         filterLine.addEventListener('change', filterCars);
     }
@@ -890,6 +925,7 @@
         });
     }
 
+    syncCarCardsWithCatalog();
     renderServiceQuickLinks();
     renderPaintPreviewSwatches();
     renderCompareButtons();
