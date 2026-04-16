@@ -45,27 +45,32 @@
     let compareInfoBox = null;
     let compareHighlightBtn = null;
     let compareHighlightActive = false;
-    const carLineLabels = {
-        mercedes: 'Mercedes',
-        bmw: 'BMW',
-        audi: 'Audi',
-        porsche: 'Porsche',
-        lexus: 'Lexus',
-        ford: 'Ford',
-        mazda: 'Mazda'
-    };
-    const carCatalog = [
-        { name: 'Mazda 2 Hatchback', image: 'mazda-2-hatchback.jpg', image_url: './images/cars/mazda-2-hatchback.jpg', category: 'Xe hạng B', price: '418.000.000đ', priceBand: 'under700', purpose: 'do-thi', line: 'mazda', cardClass: 'sedan' },
-        { name: 'Lamborghini Huracan', image: 'lamborghini-huracan.jpg', image_url: './images/cars/lamborghini-huracan.jpg', category: 'Siêu xe thể thao', price: '21.500.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'porsche', cardClass: 'sport' },
-        { name: 'Tesla Model 3', image: 'tesla-model-3.jpg', image_url: './images/cars/tesla-model-3.jpg', category: 'Xe điện cao cấp', price: '1.399.000.000đ', priceBand: 'above1200', purpose: 'cao-cap', line: 'lexus', cardClass: 'electric' },
-        { name: 'Lamborghini Aventador', image: 'lamborghini-aventador.jpg', image_url: './images/cars/lamborghini-aventador.jpg', category: 'Siêu xe thể thao', price: '45.900.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'porsche', cardClass: 'sport' },
-        { name: 'Ferrari 458 Italia', image: 'ferrari-458-italia.jpg', image_url: './images/cars/ferrari-458-italia.jpg', category: 'Siêu xe thể thao', price: '17.900.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'porsche', cardClass: 'sport' },
-        { name: 'Ford Mustang', image: 'ford-mustang.jpg', image_url: './images/cars/ford-mustang.jpg', category: 'Xe cơ bắp Mỹ', price: '2.490.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'ford', cardClass: 'sport' },
-        { name: 'Ford Expedition', image: 'ford-expedition.jpg', image_url: './images/cars/ford-expedition.jpg', category: 'SUV hạng Full-size', price: '4.950.000.000đ', priceBand: 'above1200', purpose: 'gia-dinh', line: 'ford', cardClass: 'suv' },
-        { name: 'Mercedes-Benz S-Class', image: 'mercedes-s-class.jpg', image_url: './images/cars/mercedes-s-class.jpg', category: 'Sedan hạng sang', price: '5.990.000.000đ', priceBand: 'above1200', purpose: 'cao-cap', line: 'mercedes', cardClass: 'sedan' },
-        { name: 'BMW M8 Competition', image: 'bmw-m8-competition.jpg', image_url: './images/cars/bmw-m8-competition.jpg', category: 'Xe thể thao hạng sang', price: '9.250.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'bmw', cardClass: 'sport' },
-        { name: 'Audi Q7', image: 'audi-q7.jpg', image_url: './images/cars/audi-q7.jpg', category: 'SUV hạng sang', price: '4.390.000.000đ', priceBand: 'above1200', purpose: 'gia-dinh', line: 'audi', cardClass: 'suv' }
-    ];
+const carLineLabels = {
+    mercedes: 'Mercedes',
+    bmw: 'BMW',
+    audi: 'Audi',
+    porsche: 'Porsche',
+    lexus: 'Lexus',
+    ford: 'Ford',
+    mazda: 'Mazda',
+    lamborghini: 'Lamborghini', // Thêm mới để khớp với Huracan/Aventador
+    ferrari: 'Ferrari',         // Thêm mới để khớp với Ferrari 458
+    tesla: 'Tesla'              // Thêm mới để khớp với Tesla Model 3
+};
+
+const carCatalog = [
+    { name: 'Mazda 2 Hatchback', image: 'mazda-2-hatchback.jpg', image_url: './images/cars/mazda-2-hatchback.jpg', category: 'Xe hạng B', price: '418.000.000đ', priceBand: 'under700', purpose: 'do-thi', line: 'mazda', cardClass: 'sedan' },
+    { name: 'Lamborghini Huracan', image: 'download.jpg', image_url: './images/cars/download.jpg', category: 'Siêu xe thể thao', price: '21.500.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'lamborghini', cardClass: 'sport' },
+    { name: 'Tesla Model 3', image: '2026-tesla-model-3-performance-103-68a6100d88660.avif', image_url: './images/cars/2026-tesla-model-3-performance-103-68a6100d88660.avif', category: 'Xe điện cao cấp', price: '1.399.000.000đ', priceBand: 'above1200', purpose: 'cao-cap', line: 'tesla', cardClass: 'electric' },
+    { name: 'Lamborghini Aventador', image: 'Lamborghini_Aventador.jpg', image_url: './images/cars/Lamborghini_Aventador.jpg', category: 'Siêu xe thể thao', price: '45.900.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'lamborghini', cardClass: 'sport' },
+    { name: 'Ferrari 458 Italia', image: 'images.jpg', image_url: './images/cars/images.jpg', category: 'Siêu xe thể thao', price: '17.900.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'ferrari', cardClass: 'sport' },
+    { name: 'Ford Mustang', image: 'Ford-Mustang-Exterior-126883.avif', image_url: './images/cars/Ford-Mustang-Exterior-126883.avif', category: 'Xe cơ bắp Mỹ', price: '2.490.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'ford', cardClass: 'sport' },
+    { name: 'Ford Expedition', image: 'download.webp', image_url: './images/cars/download.webp', category: 'SUV hạng Full-size', price: '4.950.000.000đ', priceBand: 'above1200', purpose: 'gia-dinh', line: 'ford', cardClass: 'suv' },
+    { name: 'Mercedes-Benz S-Class', image: 'front-left-side-47.avif', image_url: './images/cars/front-left-side-47.avif', category: 'Sedan hạng sang', price: '5.990.000.000đ', priceBand: 'above1200', purpose: 'cao-cap', line: 'mercedes', cardClass: 'sedan' },
+    { name: 'BMW M8 Competition', image: 'bmw-m8-competition.avif', image_url: './images/cars/bmw-m8-competition.avif', category: 'Xe thể thao hạng sang', price: '9.250.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'bmw', cardClass: 'sport' },
+    { name: 'Audi Q7', image: 'Audi-Q7.avif', image_url: './images/cars/Audi-Q7.avif', category: 'SUV hạng sang', price: '4.390.000.000đ', priceBand: 'above1200', purpose: 'gia-dinh', line: 'audi', cardClass: 'suv' }
+];
+
     const paintPresets = [
         { name: 'Nguyên bản', color: 'transparent', opacity: '0' },
         { name: 'Đen bóng', color: '#17181a', opacity: '0.42' },
@@ -171,6 +176,48 @@
             camera: '360° View',
             airbags: '6',
             brakeAssist: 'ABS/EBD/BA'
+        },
+        lamborghini: {
+            wheel: '20-21 inch forged',
+            lights: 'LED Y-shape',
+            paint: 'Giallo Orion',
+            design: 'Aero Carbon Kit',
+            seatMaterial: 'Alcantara + Carbon',
+            centerScreen: '8.4 inch dual display',
+            ac: '2 vùng tự động',
+            smartCabin: 'Có',
+            adas: 'Hiệu năng cao',
+            camera: 'Camera lùi + cảm biến',
+            airbags: '6',
+            brakeAssist: 'ABS/ESC/Carbon Ceramic'
+        },
+        ferrari: {
+            wheel: '20 inch forged',
+            lights: 'Bi-Xenon/LED DRL',
+            paint: 'Rosso Corsa',
+            design: 'Berlinetta Sport',
+            seatMaterial: 'Da thể thao',
+            centerScreen: 'Dual TFT cluster',
+            ac: '2 vùng tự động',
+            smartCabin: 'Có',
+            adas: 'Hiệu năng cao',
+            camera: 'Camera lùi + cảm biến',
+            airbags: '6',
+            brakeAssist: 'ABS/ESC/Carbon Ceramic'
+        },
+        tesla: {
+            wheel: '18-19 inch Aero',
+            lights: 'LED Matrix',
+            paint: 'Midnight Silver',
+            design: 'Minimalist EV',
+            seatMaterial: 'Vegan Leather',
+            centerScreen: '15.4 inch touchscreen',
+            ac: '2 vùng tự động',
+            smartCabin: 'Có',
+            adas: 'Autopilot',
+            camera: 'Tesla Vision',
+            airbags: '8',
+            brakeAssist: 'ABS/EBD/BA'
         }
     };
     const paintMaskClasses = ['paint-mask-sedan', 'paint-mask-sport', 'paint-mask-suv', 'paint-mask-hybrid', 'paint-mask-electric'];
@@ -188,6 +235,9 @@
         if (lower.includes('mercedes')) return 'mercedes';
         if (lower.includes('bmw')) return 'bmw';
         if (lower.includes('audi')) return 'audi';
+        if (lower.includes('lamborghini')) return 'lamborghini';
+        if (lower.includes('ferrari')) return 'ferrari';
+        if (lower.includes('tesla')) return 'tesla';
         if (lower.includes('porsche')) return 'porsche';
         if (lower.includes('lexus')) return 'lexus';
         if (lower.includes('ford')) return 'ford';
