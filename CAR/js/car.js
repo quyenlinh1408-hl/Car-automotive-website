@@ -60,23 +60,23 @@ const carLineLabels = {
 
 const carCatalog = [
     { name: 'Mazda 2 Hatchback', image: 'mazda-2-hatchback.jpg', image_url: './images/cars/mazda-2-hatchback.jpg', category: 'Xe hạng B', price: '418.000.000đ', priceBand: 'under700', purpose: 'do-thi', line: 'mazda', cardClass: 'sedan' },
-    { name: 'Lamborghini Huracan', image: 'download.jpg', image_url: './images/cars/download.jpg', category: 'Siêu xe thể thao', price: '21.500.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'lamborghini', cardClass: 'sport' },
-    { name: 'Tesla Model 3', image: '2026-tesla-model-3-performance-103-68a6100d88660.avif', image_url: './images/cars/2026-tesla-model-3-performance-103-68a6100d88660.avif', category: 'Xe điện cao cấp', price: '1.399.000.000đ', priceBand: 'above1200', purpose: 'cao-cap', line: 'tesla', cardClass: 'electric' },
-    { name: 'Lamborghini Aventador', image: 'Lamborghini_Aventador.jpg', image_url: './images/cars/Lamborghini_Aventador.jpg', category: 'Siêu xe thể thao', price: '45.900.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'lamborghini', cardClass: 'sport' },
-    { name: 'Ferrari 458 Italia', image: 'images.jpg', image_url: './images/cars/images.jpg', category: 'Siêu xe thể thao', price: '17.900.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'ferrari', cardClass: 'sport' },
-    { name: 'Ford Mustang', image: 'Ford-Mustang-Exterior-126883.avif', image_url: './images/cars/Ford-Mustang-Exterior-126883.avif', category: 'Xe cơ bắp Mỹ', price: '2.490.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'ford', cardClass: 'sport' },
-    { name: 'Ford Expedition', image: 'download.webp', image_url: './images/cars/download.webp', category: 'SUV hạng Full-size', price: '4.950.000.000đ', priceBand: 'above1200', purpose: 'gia-dinh', line: 'ford', cardClass: 'suv' },
-    { name: 'Mercedes-Benz S-Class', image: 'front-left-side-47.avif', image_url: './images/cars/front-left-side-47.avif', category: 'Sedan hạng sang', price: '5.990.000.000đ', priceBand: 'above1200', purpose: 'cao-cap', line: 'mercedes', cardClass: 'sedan' },
+    { name: 'Lamborghini Huracan', image: 'lamborghini-huracan.jpg', image_url: './images/cars/lamborghini-huracan.jpg', category: 'Siêu xe thể thao', price: '21.500.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'lamborghini', cardClass: 'sport' },
+    { name: 'Tesla Model 3', image: 'tesla-model-3.avif', image_url: './images/cars/tesla-model-3.avif', category: 'Xe điện cao cấp', price: '1.399.000.000đ', priceBand: 'above1200', purpose: 'cao-cap', line: 'tesla', cardClass: 'electric' },
+    { name: 'Lamborghini Aventador', image: 'lamborghini-aventador.jpg', image_url: './images/cars/lamborghini-aventador.jpg', category: 'Siêu xe thể thao', price: '45.900.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'lamborghini', cardClass: 'sport' },
+    { name: 'Ferrari 458 Italia', image: 'ferrari-458-italia.jpg', image_url: './images/cars/ferrari-458-italia.jpg', category: 'Siêu xe thể thao', price: '17.900.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'ferrari', cardClass: 'sport' },
+    { name: 'Ford Mustang', image: 'ford-mustang.avif', image_url: './images/cars/ford-mustang.avif', category: 'Xe cơ bắp Mỹ', price: '2.490.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'ford', cardClass: 'sport' },
+    { name: 'Ford Expedition', image: 'ford-expedition.webp', image_url: './images/cars/ford-expedition.webp', category: 'SUV hạng Full-size', price: '4.950.000.000đ', priceBand: 'above1200', purpose: 'gia-dinh', line: 'ford', cardClass: 'suv' },
+    { name: 'Mercedes-Benz S-Class', image: 'mercedes-s-class.avif', image_url: './images/cars/mercedes-s-class.avif', category: 'Sedan hạng sang', price: '5.990.000.000đ', priceBand: 'above1200', purpose: 'cao-cap', line: 'mercedes', cardClass: 'sedan' },
     { name: 'BMW M8 Competition', image: 'bmw-m8-competition.avif', image_url: './images/cars/bmw-m8-competition.avif', category: 'Xe thể thao hạng sang', price: '9.250.000.000đ', priceBand: 'above1200', purpose: 'the-thao', line: 'bmw', cardClass: 'sport' },
-    { name: 'Audi Q7', image: 'Audi-Q7.avif', image_url: './images/cars/Audi-Q7.avif', category: 'SUV hạng sang', price: '4.390.000.000đ', priceBand: 'above1200', purpose: 'gia-dinh', line: 'audi', cardClass: 'suv' }
+    { name: 'Audi Q7', image: 'audi-q7.avif', image_url: './images/cars/audi-q7.avif', category: 'SUV hạng sang', price: '4.390.000.000đ', priceBand: 'above1200', purpose: 'gia-dinh', line: 'audi', cardClass: 'suv' }
 ];
 
     const paintPresets = [
         { name: 'Nguyên bản', color: 'transparent', opacity: '0' },
-        { name: 'Đen bóng', color: '#17181a', opacity: '0.42' },
-        { name: 'Đỏ ruby', color: '#b31f2f', opacity: '0.58' },
-        { name: 'Xanh midnight', color: '#1d4f8a', opacity: '0.56' },
-        { name: 'Bạc ánh kim', color: '#bcc4ce', opacity: '0.36' }
+        { name: 'Đen bóng', color: '#17181a', opacity: '0.82' },
+        { name: 'Đỏ ruby', color: '#b31f2f', opacity: '0.9' },
+        { name: 'Xanh midnight', color: '#1d4f8a', opacity: '0.9' },
+        { name: 'Bạc ánh kim', color: '#bcc4ce', opacity: '0.8' }
     ];
     const compareProfiles = {
         mercedes: {

@@ -754,7 +754,7 @@ nav ul li a:hover { color: var(--luxury-gold-soft); }
     pointer-events: none;
     opacity: var(--paint-opacity, 0);
     background: var(--paint-color, transparent);
-    mix-blend-mode: color;
+    mix-blend-mode: normal;
     transition: opacity var(--paint-transition), background var(--paint-transition);
     -webkit-mask-image: var(--paint-mask);
     mask-image: var(--paint-mask);
