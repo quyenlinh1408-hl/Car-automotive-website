@@ -53,6 +53,83 @@ input[type='reset'] {
     letter-spacing: 1px;
 }
 
+.support-fab {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1200;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.support-fab-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 170px;
+    padding: 12px 18px 12px 14px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #0d6cf2 0%, #0059d9 100%);
+    color: #ffffff;
+    text-decoration: none;
+    box-shadow: 0 12px 24px rgba(0, 89, 217, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    backdrop-filter: blur(8px);
+}
+
+.support-fab-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(0, 89, 217, 0.34);
+    filter: brightness(1.03);
+}
+
+.support-fab-item:focus-visible {
+    outline: 3px solid rgba(199, 166, 90, 0.65);
+    outline-offset: 3px;
+}
+
+.support-fab-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    flex: 0 0 34px;
+    background: rgba(255, 255, 255, 0.18);
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.support-fab-text {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+}
+
+.support-fab-item.messenger {
+    background: linear-gradient(180deg, #1184ff 0%, #0867f0 100%);
+}
+
+@media (max-width: 640px) {
+    .support-fab {
+        right: 16px;
+        bottom: 16px;
+        gap: 10px;
+    }
+
+    .support-fab-item {
+        min-width: 150px;
+        padding: 10px 16px 10px 12px;
+    }
+
+    .support-fab-text {
+        font-size: 15px;
+    }
+}
+
 /* ===== HEADER ===== */
 header {
     background: linear-gradient(135deg, rgba(16, 17, 20, 0.96) 0%, rgba(20, 22, 26, 0.92) 100%);
@@ -443,53 +520,58 @@ nav ul li a:hover { color: var(--luxury-gold-soft); }
 /* ===== SUPPORT FAB ===== */
 .support-fab {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
+    right: 18px;
+    bottom: 18px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
     z-index: 1200;
 }
 
 .support-fab-item {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 16px;
+    gap: 12px;
+    min-width: 168px;
+    padding: 12px 18px 12px 14px;
     border-radius: 999px;
     text-decoration: none;
     color: #fff;
-    font-weight: 700;
-    box-shadow: 0 12px 24px rgba(0,0,0,0.18);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    font-weight: 800;
+    box-shadow: 0 12px 24px rgba(0, 89, 217, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .support-fab-item:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 16px 28px rgba(0,0,0,0.22);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(0, 89, 217, 0.34);
+    filter: brightness(1.03);
 }
 
 .support-fab-item.zalo {
-    background: linear-gradient(135deg, #0068ff 0%, #0047b3 100%);
+    background: linear-gradient(180deg, #0d6cf2 0%, #0059d9 100%);
 }
 
 .support-fab-item.messenger {
-    background: linear-gradient(135deg, #0084ff 0%, #0063c7 100%);
+    background: linear-gradient(180deg, #1184ff 0%, #0867f0 100%);
 }
 
 .support-fab-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.18);
-    font-size: 15px;
+    background: rgba(255, 255, 255, 0.18);
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
 }
 
 .support-fab-text {
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 0.2px;
 }
 
@@ -1150,6 +1232,23 @@ nav ul li a:hover { color: var(--luxury-gold-soft); }
 
     .compare-modal-head h3 {
         font-size: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .support-fab {
+        right: 16px;
+        bottom: 16px;
+        gap: 10px;
+    }
+
+    .support-fab-item {
+        min-width: 150px;
+        padding: 10px 16px 10px 12px;
+    }
+
+    .support-fab-text {
+        font-size: 15px;
     }
 }
 
