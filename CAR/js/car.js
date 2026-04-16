@@ -55,16 +55,16 @@
         mazda: 'Mazda'
     };
     const carCatalog = [
-        { name: 'Mazda 2 Hatchback', image: 'mazda-2-hatchback.jpg', image_url: './images/cars/mazda-2-hatchback.jpg', category: 'Xe hạng B', line: 'mazda', cardClass: 'sedan' },
-        { name: 'Lamborghini Huracan', image: 'lamborghini-huracan.jpg', image_url: './images/cars/lamborghini-huracan.jpg', category: 'Siêu xe thể thao', line: 'porsche', cardClass: 'sport' },
-        { name: 'Tesla Model 3', image: 'tesla-model-3.jpg', image_url: './images/cars/tesla-model-3.jpg', category: 'Xe điện cao cấp', line: 'lexus', cardClass: 'electric' },
-        { name: 'Lamborghini Aventador', image: 'lamborghini-aventador.jpg', image_url: './images/cars/lamborghini-aventador.jpg', category: 'Siêu xe thể thao', line: 'porsche', cardClass: 'sport' },
-        { name: 'Ferrari 458 Italia', image: 'ferrari-458-italia.jpg', image_url: './images/cars/ferrari-458-italia.jpg', category: 'Siêu xe thể thao', line: 'porsche', cardClass: 'sport' },
-        { name: 'Ford Mustang', image: 'ford-mustang.jpg', image_url: './images/cars/ford-mustang.jpg', category: 'Xe cơ bắp Mỹ', line: 'ford', cardClass: 'sport' },
-        { name: 'Ford Expedition', image: 'ford-expedition.jpg', image_url: './images/cars/ford-expedition.jpg', category: 'SUV hạng Full-size', line: 'ford', cardClass: 'suv' },
-        { name: 'Mercedes-Benz S-Class', image: 'mercedes-s-class.jpg', image_url: './images/cars/mercedes-s-class.jpg', category: 'Sedan hạng sang', line: 'mercedes', cardClass: 'sedan' },
-        { name: 'BMW M8 Competition', image: 'bmw-m8-competition.jpg', image_url: './images/cars/bmw-m8-competition.jpg', category: 'Xe thể thao hạng sang', line: 'bmw', cardClass: 'sport' },
-        { name: 'Audi Q7', image: 'audi-q7.jpg', image_url: './images/cars/audi-q7.jpg', category: 'SUV hạng sang', line: 'audi', cardClass: 'suv' }
+        { name: 'Mazda 2 Hatchback', image: 'mazda-2-hatchback.jpg', image_url: './images/cars/mazda-2-hatchback.jpg', category: 'Xe hạng B', price: '418.000.000đ', line: 'mazda', cardClass: 'sedan' },
+        { name: 'Lamborghini Huracan', image: 'lamborghini-huracan.jpg', image_url: './images/cars/lamborghini-huracan.jpg', category: 'Siêu xe thể thao', price: '21.500.000.000đ', line: 'porsche', cardClass: 'sport' },
+        { name: 'Tesla Model 3', image: 'tesla-model-3.jpg', image_url: './images/cars/tesla-model-3.jpg', category: 'Xe điện cao cấp', price: '1.399.000.000đ', line: 'lexus', cardClass: 'electric' },
+        { name: 'Lamborghini Aventador', image: 'lamborghini-aventador.jpg', image_url: './images/cars/lamborghini-aventador.jpg', category: 'Siêu xe thể thao', price: '45.900.000.000đ', line: 'porsche', cardClass: 'sport' },
+        { name: 'Ferrari 458 Italia', image: 'ferrari-458-italia.jpg', image_url: './images/cars/ferrari-458-italia.jpg', category: 'Siêu xe thể thao', price: '17.900.000.000đ', line: 'porsche', cardClass: 'sport' },
+        { name: 'Ford Mustang', image: 'ford-mustang.jpg', image_url: './images/cars/ford-mustang.jpg', category: 'Xe cơ bắp Mỹ', price: '2.490.000.000đ', line: 'ford', cardClass: 'sport' },
+        { name: 'Ford Expedition', image: 'ford-expedition.jpg', image_url: './images/cars/ford-expedition.jpg', category: 'SUV hạng Full-size', price: '4.950.000.000đ', line: 'ford', cardClass: 'suv' },
+        { name: 'Mercedes-Benz S-Class', image: 'mercedes-s-class.jpg', image_url: './images/cars/mercedes-s-class.jpg', category: 'Sedan hạng sang', price: '5.990.000.000đ', line: 'mercedes', cardClass: 'sedan' },
+        { name: 'BMW M8 Competition', image: 'bmw-m8-competition.jpg', image_url: './images/cars/bmw-m8-competition.jpg', category: 'Xe thể thao hạng sang', price: '9.250.000.000đ', line: 'bmw', cardClass: 'sport' },
+        { name: 'Audi Q7', image: 'audi-q7.jpg', image_url: './images/cars/audi-q7.jpg', category: 'SUV hạng sang', price: '4.390.000.000đ', line: 'audi', cardClass: 'suv' }
     ];
     const paintPresets = [
         { name: 'Nguyên bản', color: 'transparent', opacity: '0' },
@@ -798,10 +798,12 @@
             const titleEl = card.querySelector('h3');
             const tagEl = card.querySelector('.car-tag');
             const imgEl = card.querySelector('.car-img');
+            const priceEl = card.querySelector('.price span');
 
             if (titleEl) titleEl.innerText = item.name;
             if (tagEl) tagEl.innerText = item.category;
             if (imgEl) imgEl.dataset.bg = item.image_url;
+            if (priceEl) priceEl.innerText = item.price;
 
             card.dataset.line = item.line;
             card.dataset.category = item.category;
