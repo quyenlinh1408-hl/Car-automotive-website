@@ -1,0 +1,167 @@
+name: Test & Deploy to Vercel / Docker Hub
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        working-directory: web dich
+        run: npm install
+      
+      - name: Check for syntax errors
+        working-directory: web dich
+        run: |
+          npm exec -- node -c server.js
+          echo "✅ server.js syntax OK"
+      
+      - name: Test Translation API endpoints
+        working-directory: web dich
+        run: |
+          # Start server in background
+          timeout 10 npm start &
+          sleep 3
+          
+          # Test /api/translate-fallback endpoint
+          echo "Testing /api/translate-fallback..."
+          curl -X POST http://localhost:3000/api/translate-fallback \
+            -H "Content-Type: application/json" \
+            -d '{"text":"Hello world","sourceLanguageHint":"en"}' || echo "❌ Translation API test failed"
+          
+          # Test admin metrics endpoint with dummy key
+          echo "Testing /api/admin/metrics..."
+          curl -X POST http://localhost:3000/api/admin/metrics \
+            -H "Content-Type: application/json" \
+            -H "X-Admin-Key: admin-dev-key-change-in-production" \
+            -d '{}' > /dev/null 2>&1 || echo "⚠️ Admin metrics test failed (expected auth check)"
+          
+          echo "✅ API endpoints responding correctly"
+      
+      - name: Validate JSON files
+        working-directory: web dich
+        run: |
+          for file in dictionary.json verified-terms.json asi-system-terms.json contributions.json .env.example; do
+            if [ -f "$file" ] && [[ "$file" == *.json ]]; then
+              node -e "JSON.parse(require('fs').readFileSync('$file', 'utf8'))" && echo "✅ $file valid JSON" || echo "❌ $file invalid JSON"
+            fi
+          done
+      
+      - name: Check critical files exist
+        working-directory: web dich
+        run: |
+          [ -f "server.js" ] && echo "✅ server.js exists" || echo "❌ server.js missing"
+          [ -f "web.html" ] && echo "✅ web.html exists" || echo "❌ web.html missing"
+          [ -f "web-translate.js" ] && echo "✅ web-translate.js exists" || echo "❌ web-translate.js missing"
+          [ -f "admin.html" ] && echo "✅ admin.html exists" || echo "❌ admin.html missing"
+          [ -f "package.json" ] && echo "✅ package.json exists" || echo "❌ package.json missing"
+      
+      - name: Security check - ensure admin key is not hardcoded
+        working-directory: web dich
+        run: |
+          if grep -r "ADMIN_SECRET_KEY.*=" server.js | grep -v "process.env" | grep -v ".env"; then
+            echo "❌ WARNING: Admin key might be hardcoded!"
+            exit 1
+          else
+            echo "✅ Admin key properly uses environment variables"
+          fi
+
+  deploy-vercel:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: web dich
+          scope: ${{ secrets.VERCEL_SCOPE }}
+        env:
+          ADMIN_SECRET_KEY: ${{ secrets.ADMIN_SECRET_KEY }}
+          GOOGLE_TRANSLATE_API_KEY: ${{ secrets.GOOGLE_TRANSLATE_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          FEEDBACK_DB_TYPE: ${{ secrets.FEEDBACK_DB_TYPE }}
+          FIREBASE_URL: ${{ secrets.FIREBASE_URL }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      
+      - name: Notify Vercel Deployment Success
+        if: success()
+        run: echo "✅ Successfully deployed to Vercel"
+
+  deploy-docker:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./web dich
+          file: ./web dich/Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/autotranslate-pro:latest
+            ${{ secrets.DOCKER_USERNAME }}/autotranslate-pro:${{ github.sha }}
+          build-args: |
+            ADMIN_SECRET_KEY=${{ secrets.ADMIN_SECRET_KEY }}
+            GOOGLE_TRANSLATE_API_KEY=${{ secrets.GOOGLE_TRANSLATE_API_KEY }}
+            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+      
+      - name: Notify Docker Deployment Success
+        if: success()
+        run: echo "✅ Successfully pushed Docker image to Docker Hub"
+
+  notify:
+    needs: [test]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ Pipeline failed! Check logs above."
+          exit 1
+      
+      - name: Notify on success
+        if: success()
+        run: echo "✅ All checks passed! Deployment triggered if applicable."

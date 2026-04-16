@@ -1,0 +1,657 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Automotive | Thế giới xe sang</title>
+        <meta name="description" content="Car Automotive - Showroom xe sang tại Hà Nội với các dòng Mercedes, BMW, Audi, Porsche, Lexus. Tư vấn chọn xe, tính trả góp và dịch vụ bảo dưỡng chuyên nghiệp.">
+        <meta name="robots" content="index, follow, max-image-preview:large">
+        <meta name="googlebot" content="index, follow">
+        <meta property="og:type" content="website">
+        <meta property="og:locale" content="vi_VN">
+        <meta property="og:site_name" content="Car Automotive">
+        <meta property="og:title" content="Car Automotive | Thế giới xe sang">
+        <meta property="og:description" content="Khám phá xe sang, nhận tư vấn nhanh, dự toán trả góp và đặt lịch bảo dưỡng chỉ trong vài phút.">
+        <meta property="og:url" content="https://quyenlinhfptauto.vn/car.html">
+        <meta property="og:image" content="https://quyenlinhfptauto.vn/images/cars/mercedes.jpg">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Car Automotive | Thế giới xe sang">
+        <meta name="twitter:description" content="Showroom xe sang và dịch vụ hậu mãi đẳng cấp tại Hà Nội.">
+        <meta name="twitter:image" content="https://quyenlinhfptauto.vn/images/cars/mercedes.jpg">
+        <link rel="canonical" href="https://quyenlinhfptauto.vn/car.html">
+        <link rel="sitemap" type="application/xml" title="Sitemap" href="https://quyenlinhfptauto.vn/sitemap.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles/core.css">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "AutoDealer",
+            "name": "Car Automotive",
+            "url": "https://quyenlinhfptauto.vn/car.html",
+            "telephone": "+84-900-123-456",
+            "image": "https://quyenlinhfptauto.vn/images/cars/mercedes.jpg",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Số 61, Đường 419, Tân Xã, Thạch Thất",
+                "addressLocality": "Hà Nội",
+                "addressCountry": "VN"
+            },
+            "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                "opens": "08:00",
+                "closes": "20:00"
+            },
+            "sameAs": [
+                "https://zalo.me/",
+                "https://m.me/"
+            ]
+        }
+        </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">CAR<span>AUTO</span></div>
+            <ul>
+                <li><a href="#hero">Trang chủ</a></li>
+                <li><a href="#cars">Dòng xe</a></li>
+                <li><a href="#services">Dịch vụ</a></li>
+                <li><a href="feedback.html">Ý kiến KH</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>TRẢI NGHIỆM ĐẲNG CẤP</h1>
+            <p>Khám phá những mẫu xe mới nhất với công nghệ hàng đầu thế giới.</p>
+            <a href="#cars" class="btn hero-cta" aria-label="Xem ngay các mẫu xe">
+                <span class="hero-cta-label">Xem ngay</span>
+                <span class="hero-cta-arrow" aria-hidden="true">→</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="quick-filter" aria-label="Bộ lọc thông minh">
+        <div class="quick-filter-inner">
+            <div class="quick-filter-head">
+                <h2>Bộ lọc thông minh</h2>
+                <p>Chọn dòng xe, khoảng giá và mục đích sử dụng để tìm xe phù hợp ngay lập tức.</p>
+            </div>
+            <div class="quick-filter-controls">
+                <div class="filter-group">
+                    <label for="filterLine">Chọn dòng xe</label>
+                    <select id="filterLine">
+                        <option value="all">Tất cả dòng xe</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="bmw">BMW</option>
+                        <option value="audi">Audi</option>
+                        <option value="porsche">Porsche</option>
+                        <option value="lexus">Lexus</option>
+                        <option value="ford">Ford</option>
+                        <option value="mazda">Mazda</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filterPrice">Khoảng giá</label>
+                    <select id="filterPrice">
+                        <option value="all">Tất cả mức giá</option>
+                        <option value="under700">Dưới 700 triệu</option>
+                        <option value="700to1200">700 triệu - 1,2 tỷ</option>
+                        <option value="above1200">Trên 1,2 tỷ</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filterPurpose">Mục đích sử dụng</label>
+                    <select id="filterPurpose">
+                        <option value="all">Tất cả mục đích</option>
+                        <option value="do-thi">Đô thị</option>
+                        <option value="gia-dinh">Gia đình</option>
+                        <option value="the-thao">Thể thao</option>
+                        <option value="doanh-nghiep">Doanh nghiệp</option>
+                        <option value="cao-cap">Cao cấp</option>
+                    </select>
+                </div>
+                <div class="filter-actions">
+                    <button type="button" class="btn filter-btn" id="applyFilter">Tìm nhanh</button>
+                    <button type="button" class="btn reset-btn" id="resetFilter">Xóa bộ lọc</button>
+                </div>
+            </div>
+            <div class="filter-result" id="filterResult">Đang hiển thị 10 mẫu xe</div>
+        </div>
+    </section>
+
+    <section class="finance-tool" aria-label="Công cụ dự toán tài chính">
+        <div class="finance-inner">
+            <div class="finance-copy">
+                <span class="section-kicker">Công cụ dự toán tài chính</span>
+                <h2>Tính nhanh số tiền trả góp hàng tháng</h2>
+                <p>Nhập giá xe, số tiền trả trước, lãi suất và kỳ hạn để xem ngay khoản phải trả mỗi tháng.</p>
+            </div>
+
+            <div class="finance-grid">
+                <div class="finance-form">
+                    <div class="finance-field">
+                        <label for="carPriceInput">Giá xe (triệu đồng)</label>
+                        <input id="carPriceInput" type="number" min="0" step="1" value="900" placeholder="Ví dụ: 900">
+                    </div>
+                    <div class="finance-field">
+                        <label for="downPaymentInput">Trả trước (triệu đồng)</label>
+                        <input id="downPaymentInput" type="number" min="0" step="1" value="270" placeholder="Ví dụ: 270">
+                    </div>
+                    <div class="finance-field">
+                        <label for="interestInput">Lãi suất/năm (%)</label>
+                        <input id="interestInput" type="number" min="0" step="0.1" value="8.5" placeholder="Ví dụ: 8.5">
+                    </div>
+                    <div class="finance-field">
+                        <label for="termInput">Kỳ hạn vay (tháng)</label>
+                        <input id="termInput" type="number" min="1" step="1" value="60" placeholder="Ví dụ: 60">
+                    </div>
+                    <div class="finance-actions">
+                        <button type="button" class="btn finance-btn" id="calculateFinance">Tính khoản trả góp</button>
+                        <button type="button" class="btn finance-reset" id="resetFinance">Đặt lại</button>
+                    </div>
+                </div>
+
+                <div class="finance-result-card">
+                    <p class="finance-label">Số tiền vay</p>
+                    <h3 id="loanAmount">630.000.000đ</h3>
+                    <p class="finance-label">Thanh toán hàng tháng</p>
+                    <div class="monthly-payment" id="monthlyPayment">12.800.000đ</div>
+                    <div class="finance-summary">
+                        <div>
+                            <span>Tổng lãi ước tính</span>
+                            <strong id="totalInterest">52.800.000đ</strong>
+                        </div>
+                        <div>
+                            <span>Tổng tiền phải trả</span>
+                            <strong id="totalRepayment">682.800.000đ</strong>
+                        </div>
+                    </div>
+                    <p class="finance-note">Kết quả chỉ mang tính tham khảo, có thể thay đổi theo chính sách từng ngân hàng và thời điểm vay.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cars" id="cars">
+    <h2>Mẫu Xe Nổi Bật</h2>
+    <div class="car-grid">
+        <!-- Xe 1: Mercedes -->
+        <div class="car-card sedan" data-line="mercedes" data-price="above1200" data-purpose="cao-cap">
+            <div class="car-img-container">
+                <div class="car-img" data-bg="../images/cars/mercedes.jpg"></div>
+                <div class="car-overlay">
+                    <a href="#" class="btn-outline">Xem chi tiết</a>
+                </div>
+            </div>
+            <div class="car-info">
+                <span class="car-tag">Xe sang hạng A</span>
+                <h3>Mercedes S-Class</h3>
+                <div class="car-specs">
+                    <span><i class="icon">👥</i> 5 Chỗ</span>
+                    <span><i class="icon">⛽</i> Hybrid</span>
+                    <span><i class="icon">⚙️</i> Tự động 9 cấp</span>
+                </div>
+                <p class="price">Giá từ: <span>3.500.000.000đ</span></p>
+            </div>
+        </div>
+
+        <!-- Xe 2: BMW -->
+        <div class="car-card sport" data-line="bmw" data-price="above1200" data-purpose="the-thao">
+            <div class="car-img-container">
+                <div class="car-img" data-bg="../images/cars/bmw.jpg"></div>
+                <div class="car-overlay">
+                    <a href="#" class="btn-outline">Xem chi tiết</a>
+                </div>
+            </div>
+            <div class="car-info">
+                <span class="car-tag">Thể thao sang</span>
+                <h3>BMW M8 Competition</h3>
+                <div class="car-specs">
+                    <span><i class="icon">👥</i> 4 Chỗ</span>
+                    <span><i class="icon">⛽</i> Xăng 625 HP</span>
+                    <span><i class="icon">⚙️</i> Tự động 8 cấp</span>
+                </div>
+                <p class="price">Giá từ: <span>5.200.000.000đ</span></p>
+            </div>
+        </div>
+
+        <!-- Xe 3: Audi Q7 -->
+        <div class="car-card suv" data-line="audi" data-price="above1200" data-purpose="gia-dinh">
+            <div class="car-img-container">
+                <div class="car-img" data-bg="../images/cars/audi.jpg"></div>
+                <div class="car-overlay">
+                    <a href="#" class="btn-outline">Xem chi tiết</a>
+                </div>
+            </div>
+            <div class="car-info">
+                <span class="car-tag">SUV Hạng sang</span>
+                <h3>Audi Q7 Prestige</h3>
+                <div class="car-specs">
+                    <span><i class="icon">👥</i> 7 Chỗ</span>
+                    <span><i class="icon">⛽</i> Hybrid TFSI</span>
+                    <span><i class="icon">⚙️</i> Tự động Quattro</span>
+                </div>
+                <p class="price">Giá từ: <span>3.800.000.000đ</span></p>
+            </div>
+        </div>
+
+        <!-- Xe 4: Porsche -->
+        <div class="car-card hybrid" data-line="porsche" data-price="above1200" data-purpose="the-thao">
+            <div class="car-img-container">
+                <div class="car-img" data-bg="../images/cars/porsche.jpg"></div>
+                <div class="car-overlay">
+                    <a href="#" class="btn-outline">Xem chi tiết</a>
+                </div>
+            </div>
+            <div class="car-info">
+                <span class="car-tag">Siêu xe sang</span>
+                <h3>Porsche 911 Turbo</h3>
+                <div class="car-specs">
+                    <span><i class="icon">👥</i> 2 Chỗ</span>
+                    <span><i class="icon">⛽</i> Xăng 580 HP</span>
+                    <span><i class="icon">⚙️</i> Tự động 8 cấp</span>
+                </div>
+                <p class="price">Giá từ: <span>6.500.000.000đ</span></p>
+            </div>
+        </div>
+
+        <!-- Xe 5: Lexus LS -->
+        <div class="car-card electric" data-line="lexus" data-price="above1200" data-purpose="cao-cap">
+            <div class="car-img-container">
+                <div class="car-img" data-bg="../images/cars/lexus.jpg" style="background-color: #111;"></div>
+                <div class="car-overlay">
+                    <a href="#" class="btn-outline">Xem chi tiết</a>
+                </div>
+            </div>
+            <div class="car-info">
+                <span class="car-tag">Xe sang cao cấp</span>
+                <h3>Lexus LS Hybrid</h3>
+                <div class="car-specs">
+                    <span><i class="icon">👥</i> 5 Chỗ</span>
+                    <span><i class="icon">⚡</i> Hybrid V6</span>
+                    <span><i class="icon">⚙️</i> Tự động 10 cấp</span>
+                </div>
+                <p class="price">Giá từ: <span>3.200.000.000đ</span></p>
+            </div>
+        </div>
+
+        <!-- Xe 6: Mazda 3 -->
+        <div class="car-card sedan" data-line="mazda" data-price="under700" data-purpose="do-thi">
+            <div class="car-img-container">
+                <div class="car-img" data-bg="../images/cars/mazda3.jpg"></div>
+                <div class="car-overlay">
+                    <a href="#" class="btn-outline">Xem chi tiết</a>
+                </div>
+            </div>
+            <div class="car-info">
+                <span class="car-tag">Sedan hạng C</span>
+                <h3>Mazda 3 2024</h3>
+                <div class="car-specs">
+                    <span><i class="icon">👥</i> 5 Chỗ</span>
+                    <span><i class="icon">⛽</i> 1.5L Xăng</span>
+                    <span><i class="icon">⚙️</i> Tự động 6 cấp</span>
+                </div>
+                <p class="price">Giá từ: <span>650.000.000đ</span></p>
+            </div>
+        </div>
+
+        <!-- Xe 7: Mazda 6 -->
+        <div class="car-card sport" data-line="mazda" data-price="700to1200" data-purpose="doanh-nghiep">
+            <div class="car-img-container">
+                <div class="car-img" data-bg="../images/cars/mazda6.jpg"></div>
+                <div class="car-overlay">
+                    <a href="#" class="btn-outline">Xem chi tiết</a>
+                </div>
+            </div>
+            <div class="car-info">
+                <span class="car-tag">Sedan hạng D</span>
+                <h3>Mazda 6 Premium</h3>
+                <div class="car-specs">
+                    <span><i class="icon">👥</i> 5 Chỗ</span>
+                    <span><i class="icon">⛽</i> 2.5L Xăng</span>
+                    <span><i class="icon">⚙️</i> Tự động 8 cấp</span>
+                </div>
+                <p class="price">Giá từ: <span>1.050.000.000đ</span></p>
+            </div>
+        </div>
+
+        <!-- Xe 8: Mazda CX-5 -->
+        <div class="car-card suv" data-line="mazda" data-price="700to1200" data-purpose="gia-dinh">
+            <div class="car-img-container">
+                <div class="car-img" data-bg="../images/cars/cx5.jpg"></div>
+                <div class="car-overlay">
+                    <a href="#" class="btn-outline">Xem chi tiết</a>
+                </div>
+            </div>
+            <div class="car-info">
+                <span class="car-tag">SUV Hạng C</span>
+                <h3>Mazda CX-5 2024</h3>
+                <div class="car-specs">
+                    <span><i class="icon">👥</i> 5 Chỗ</span>
+                    <span><i class="icon">⛽</i> 2.0L/2.5L Xăng</span>
+                    <span><i class="icon">⚙️</i> Tự động 6 cấp</span>
+                </div>
+                <p class="price">Giá từ: <span>899.000.000đ</span></p>
+            </div>
+        </div>
+
+        <!-- Xe 9: Ford Everest -->
+        <div class="car-card hybrid" data-line="ford" data-price="above1200" data-purpose="gia-dinh">
+            <div class="car-img-container">
+                <div class="car-img" data-bg="../images/cars/cx9.jpg"></div>
+                <div class="car-overlay">
+                    <a href="#" class="btn-outline">Xem chi tiết</a>
+                </div>
+            </div>
+            <div class="car-info">
+                <span class="car-tag">SUV Hạng D</span>
+                <h3>Ford Everest Titanium</h3>
+                <div class="car-specs">
+                    <span><i class="icon">👥</i> 7 Chỗ</span>
+                    <span><i class="icon">⛽</i> 2.0L Bi-Turbo Diesel</span>
+                    <span><i class="icon">⚙️</i> Tự động 10 cấp</span>
+                </div>
+                <p class="price">Giá từ: <span>1.399.000.000đ</span></p>
+            </div>
+        </div>
+
+        <!-- Xe 10: Mazda 2 -->
+        <div class="car-card electric" data-line="mazda" data-price="under700" data-purpose="do-thi">
+            <div class="car-img-container">
+                <div class="car-img" data-bg="../images/cars/mazda2.jpg" style="background-color: #111;"></div>
+                <div class="car-overlay">
+                    <a href="#" class="btn-outline">Xem chi tiết</a>
+                </div>
+            </div>
+            <div class="car-info">
+                <span class="car-tag">Sedan Hạng B</span>
+                <h3>Mazda 2 2024</h3>
+                <div class="car-specs">
+                    <span><i class="icon">👥</i> 5 Chỗ</span>
+                    <span><i class="icon">⛽</i> 1.5L Xăng</span>
+                    <span><i class="icon">⚙️</i> Tự động 6 cấp</span>
+                </div>
+                <p class="price">Giá từ: <span>499.000.000đ</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="social-proof" aria-label="Dấu ấn khách hàng và đối tác">
+    <div class="social-proof-inner">
+        <div class="social-proof-header">
+            <span class="section-kicker">Social Proof</span>
+            <h2>Đối tác tin cậy và kết quả bán hàng thực tế</h2>
+            <p>Nhìn thấy con số trước khi quyết định giúp khách hàng yên tâm hơn khi lựa chọn chiếc xe phù hợp.</p>
+        </div>
+
+        <div class="proof-stats">
+            <div class="proof-stat">
+                <strong>1.200+</strong>
+                <span>xe đã bán</span>
+            </div>
+            <div class="proof-stat">
+                <strong>25+</strong>
+                <span>đối tác và đại lý liên kết</span>
+            </div>
+            <div class="proof-stat">
+                <strong>4.9/5</strong>
+                <span>điểm đánh giá khách hàng</span>
+            </div>
+            <div class="proof-stat">
+                <strong>98%</strong>
+                <span>khách hàng hài lòng</span>
+            </div>
+        </div>
+
+        <div class="partner-band" aria-label="Logo đối tác">
+            <span class="partner-chip">Mazda</span>
+            <span class="partner-chip">FPT</span>
+            <span class="partner-chip">Toyota</span>
+            <span class="partner-chip">Honda</span>
+            <span class="partner-chip">VinFast</span>
+            <span class="partner-chip">THACO</span>
+        </div>
+
+        <div class="proof-quotes">
+            <blockquote>
+                “Tư vấn rất rõ ràng, xe giao đúng hẹn, thủ tục nhanh.”
+                <cite>- Anh Minh, khách mua Mazda CX-5</cite>
+            </blockquote>
+            <blockquote>
+                “Dịch vụ hậu mãi tốt, mình quay lại bảo dưỡng định kỳ rất tiện.”
+                <cite>- Chị Hạnh, khách hàng doanh nghiệp</cite>
+            </blockquote>
+        </div>
+    </div>
+</section>
+
+<section id="journeyReactRoot" aria-label="Hành trình từ bán xe đến bảo dưỡng"></section>
+
+
+<section class="services" id="services">
+    <h2>Dịch Vụ Của Chúng Tôi</h2>
+    <div class="service-grid">
+    <!-- Dịch vụ 1 -->
+    <div class="service-item">
+        <div class="service-icon">🛠️</div>
+        <h3>Bảo Dưỡng Định Kỳ</h3>
+        <p>Giúp xe luôn trong tình trạng hoàn hảo nhất.</p>
+        <!-- Đây là các ý con bạn cần -->
+        <ul class="service-details">
+            <li>Thay dầu và lọc nhớt chính hãng</li>
+            <li>Kiểm tra hệ thống phanh, lốp</li>
+            <li>Cập nhật phần mềm điều khiển</li>
+            <li>Vệ sinh khoang máy chi tiết</li>
+        </ul>
+    </div>
+
+    <!-- Dịch vụ 2 -->
+    <div class="service-item">
+        <div class="service-icon">⚙️</div>
+        <h3>Phụ Tùng Chính Hãng</h3>
+        <p>An tâm tuyệt đối với linh kiện chuẩn toàn cầu.</p>
+        <ul class="service-details">
+            <li>Bảo hành 12 tháng cho linh kiện</li>
+            <li>Kho phụ tùng đầy đủ cho mọi dòng xe</li>
+            <li>Hỗ trợ đặt hàng nhanh từ nước ngoài</li>
+            <li>Kiểm tra mã code chống hàng giả</li>
+        </ul>
+    </div>
+
+    <!-- Dịch vụ 3 -->
+    <div class="service-item">
+        <div class="service-icon">📞</div>
+        <h3>Cứu Hộ 24/7</h3>
+        <p>Luôn đồng hành cùng bạn trên mọi cung đường.</p>
+        <ul class="service-details">
+            <li>Có mặt trong vòng 30 phút (nội thành)</li>
+            <li>Xe kéo chuyên dụng hiện đại</li>
+            <li>Hỗ trợ thay lốp, kích bình tại chỗ</li>
+            <li>Tư vấn kỹ thuật qua video call</li>
+        </ul>
+    </div>
+</div>
+
+<div id="maintenanceOffersRoot" aria-label="Ưu đãi bảo dưỡng độc quyền"></div>
+
+<div class="service-booking-panel" id="maintenanceFormPanel">
+    <div class="service-booking-head">
+        <h3>Đặt lịch bảo dưỡng nhanh</h3>
+        <p id="serviceSelectedLine">Đang chọn: Chưa chọn dòng xe</p>
+        <p id="selectedOfferPreview">Ưu đãi đang áp dụng: Chưa chọn ưu đãi</p>
+    </div>
+    <form class="service-booking-form" id="maintenanceQuickForm">
+        <input id="selectedOfferCode" name="selectedOfferCode" type="hidden" value="">
+        <div class="booking-field">
+            <label for="serviceCarLine">Dòng xe</label>
+            <select id="serviceCarLine" name="serviceCarLine">
+                <option value="">Chọn dòng xe</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="bmw">BMW</option>
+                <option value="audi">Audi</option>
+                <option value="porsche">Porsche</option>
+                <option value="lexus">Lexus</option>
+                <option value="ford">Ford</option>
+                <option value="mazda">Mazda</option>
+            </select>
+        </div>
+        <div class="booking-field">
+            <label for="serviceDate">Ngày hẹn</label>
+            <input id="serviceDate" name="serviceDate" type="date" required>
+        </div>
+        <div class="booking-field">
+            <label for="servicePhone">Số điện thoại</label>
+            <input id="servicePhone" name="servicePhone" type="tel" placeholder="Ví dụ: 0900123456" required>
+        </div>
+        <button type="submit" class="btn service-booking-btn">Đặt lịch ngay</button>
+    </form>
+</div>
+</section>
+
+<section class="feedback">
+    <h2>Ý Kiến Khách Hàng</h2>
+    <div class="feedback-grid">
+        <!-- Feedback 1 -->
+        <div class="feedback-item">
+            <div class="feedback-stars">
+                ⭐⭐⭐⭐⭐
+            </div>
+            <p class="feedback-text">"Tôi rất hài lòng với dịch vụ của Car Automotive. Xe được bảo dưỡng chuyên nghiệp, nhân viên thân thiện và giá cả hợp lý. Sẽ tiếp tục tin tưởng sử dụng dịch vụ!"</p>
+            <div class="feedback-author">
+                <div class="author-avatar"><img src="https://randomuser.me/api/portraits/women/79.jpg" alt="Nhữ Thị Ngọc Hoa"></div>
+                <div class="author-info">
+                    <h4>Nhữ Thị Ngọc Hoa</h4>
+                    <span>Khách hàng VIP</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback 2 -->
+        <div class="feedback-item">
+            <div class="feedback-stars">
+                ⭐⭐⭐⭐⭐
+            </div>
+            <p class="feedback-text">"Đã mua xe SUV tại đây. Tư vấn viên rất nhiệt tình, giải thích rõ ràng về tính năng xe. Sau 6 tháng sử dụng, xe vẫn chạy mượt mà. Rất đáng tin cậy!"</p>
+            <div class="feedback-author">
+                <div class="author-avatar"><img src="https://randomuser.me/api/portraits/men/43.jpg" alt="Lê Nhữ Uy Long"></div>
+                <div class="author-info">
+                    <h4>Lê Nhữ Uy Long</h4>
+                    <span>Chủ xe SUV Offroad</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback 3 -->
+        <div class="feedback-item">
+            <div class="feedback-stars">
+                ⭐⭐⭐⭐⭐
+            </div>
+            <p class="feedback-text">"Dịch vụ cứu hộ 24/7 rất tuyệt vời! Xe tôi bị hỏng giữa đường lúc nửa đêm, chỉ gọi điện là có xe kéo đến ngay. Nhân viên chuyên nghiệp và thân thiện."</p>
+            <div class="feedback-author">
+                <div class="author-avatar"><img src="https://randomuser.me/api/portraits/men/68.jpg" alt="Hoàng Thọ Nam Khánh"></div>
+                <div class="author-info">
+                    <h4>Hoàng Thọ Nam Khánh</h4>
+                    <span>Khách hàng thường xuyên</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <h2>Liên Hệ Với Chúng Tôi</h2>
+    <div class="contact-container">
+        <!-- Thông tin chi tiết -->
+        <div class="contact-info">
+            <div class="info-item">
+                <span class="icon">📍</span>
+                <div>
+                    <h4>Địa Chỉ Showroom</h4>
+                    <p>Số 61, Đường 419, Tân Xã, Thạch Thất, Hà Nội</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <span class="icon">📞</span>
+                <div>
+                    <h4>Hotline Kinh Doanh</h4>
+                    <p>0900.123.456 (Hỗ trợ 24/7)</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <span class="icon">📧</span>
+                <div>
+                    <h4>Email Liên Hệ</h4>
+                    <p>contact@QuyenlinhFPTAuto.com</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <span class="icon">⏰</span>
+                <div>
+                    <h4>Giờ Mở Cửa</h4>
+                    <p>Thứ 2 - Chủ Nhật: 08:00 - 20:00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bản đồ Google Maps - Mixue Tân Xã -->
+        <div class="contact-map">
+            <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.0!2d105.5501403!3d21.0226039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345b4674a646ed%3A0x9e052e48a046687e!2sMixue%20T%C3%A2n%20X%C3%A3!5e0!3m2!1svi!2svn!4v1234567890"
+            width="100%"
+            height="350"
+            style="border:0; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</section>
+<div id="carModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-body">
+            <div id="modalImgShell" class="modal-img-shell">
+                <img id="modalImg" src="" alt="Car"> <!-- Thêm ID -->
+            </div>
+            <div class="modal-text">
+                <h2 id="modalTitle"></h2> <!-- Thêm ID -->
+                <p id="modalDesc"></p> <!-- Thêm ID -->
+                <div id="modalPaintPreview" class="modal-paint-preview" aria-label="Xem màu sơn xe"></div>
+                <a href="#" class="btn">Đăng ký lái thử ngay</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <footer>
+        <p>&copy; 2026 Quyen Linh FPT Automotive Store. All rights reserved.</p>
+    </footer>
+
+    <div class="support-fab" aria-label="Hỗ trợ nhanh">
+        <a class="support-fab-item zalo" href="https://zalo.me/" target="_blank" rel="noreferrer noopener" aria-label="Chat Zalo">
+            <span class="support-fab-icon">Z</span>
+            <span class="support-fab-text">Zalo</span>
+        </a>
+        <a class="support-fab-item messenger" href="https://m.me/" target="_blank" rel="noreferrer noopener" aria-label="Chat Messenger">
+            <span class="support-fab-icon">M</span>
+            <span class="support-fab-text">Messenger</span>
+        </a>
+    </div>
+
+    <script src="../js/car.js"></script>
+    <script type="module" src="../js/offers-react.js"></script>
+    <script type="module" src="../js/journey-react.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng Nhập - Quyền Linh Auto-UI</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-navy: #001a4d;
+      --primary-navy-light: #003d7a;
+      --primary-navy-lighter: #1e5a96;
+      --accent-coral: #ff6b35;
+      --accent-coral-dark: #e55a2b;
+      --accent-coral-light: #ff8c5a;
+      --surface-light: #f8f9fa;
+      --surface-white: #ffffff;
+      --text-primary: #001a4d;
+      --text-secondary: #666666;
+      --border-color: #e0e0e0;
+      --shadow-sm: 0 4px 12px rgba(0, 26, 77, 0.08);
+      --shadow-md: 0 10px 30px rgba(0, 26, 77, 0.12);
+      --shadow-lg: 0 20px 60px rgba(0, 26, 77, 0.15);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f5 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: var(--text-primary);
+    }
+
+    /* Header */
+    header {
+      padding: 28px 40px;
+      background: var(--surface-white);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-logo {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-navy-light) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 8px 20px rgba(0, 26, 77, 0.2);
+    }
+
+    .header-title h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      letter-spacing: -0.3px;
+    }
+
+    .header-title p {
+      font-size: 11px;
+      color: var(--accent-coral);
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .header-spacer {
+      flex: 1;
+    }
+
+    .header-info {
+      text-align: right;
+    }
+
+    .header-info p {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Main Container */
+    .main-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .main-wrapper {
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .main-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .qr-section {
+        display: none !important;
+      }
+
+      header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      .header-spacer {
+        display: none;
+      }
+
+      .header-info {
+        text-align: center;
+      }
+    }
+
+    /* Form Container */
+    .form-container {
+      background: var(--surface-white);
+      border-radius: 20px;
+      padding: 56px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .form-header {
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .form-header h2 {
+      font-size: 28px;
+      color: var(--primary-navy);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .form-header p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-navy);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: inherit;
+      background: var(--surface-white);
+      color: var(--text-primary);
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent-coral);
+      box-shadow: 
+        inset 0 1px 3px rgba(0, 0, 0, 0.05),
+        0 0 0 4px rgba(255, 107, 53, 0.1);
+      background: #fff8f5;
+    }
+
+    input::placeholder {
+      color: #bbb;
+    }
+
+    .forgot-password {
+      text-align: right;
+      margin-bottom: 32px;
+      margin-top: -8px;
+    }
+
+    .forgot-password a {
+      font-size: 13px;
+      color: var(--accent-coral);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .forgot-password a:hover {
+      color: var(--accent-coral-dark);
+    }
+
+    .forgot-password a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-coral);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .forgot-password a:hover::after {
+      opacity: 1;
+    }
+
+    /* Neumorphism Button Styles */
+    .btn-neumorphic {
+      position: relative;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 14px;
+      -webkit-user-select: none;
+      user-select: none;
+      outline: none;
+    }
+
+    .btn-neumorphic:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Primary Button (Login) */
+    .btn-primary {
+      width: 100%;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-navy-light) 100%);
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 20px;
+      box-shadow: 
+        0 8px 20px rgba(0, 26, 77, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 32px rgba(0, 26, 77, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-primary:active:not(:disabled) {
+      transform: translateY(2px);
+      box-shadow: 
+        0 4px 12px rgba(0, 26, 77, 0.25),
+        inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Google Button (Neumorphism) */
+    .btn-google {
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--surface-white);
+      color: var(--accent-coral);
+      border: 2px solid var(--accent-coral);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 
+        0 8px 20px rgba(255, 107, 53, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.05);
+      margin-bottom: 12px;
+    }
+
+    .btn-google:hover:not(:disabled) {
+      background: #fff5f0;
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 32px rgba(255, 107, 53, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-google:active:not(:disabled) {
+      background: #ffe8dc;
+      transform: translateY(2px);
+      box-shadow: 
+        0 4px 12px rgba(255, 107, 53, 0.2),
+        inset 0 2px 4px rgba(255, 107, 53, 0.15);
+    }
+
+    .google-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--accent-coral) 0%, var(--accent-coral-dark) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+    }
+
+    /* FPT Button */
+    .btn-secondary {
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--surface-light);
+      color: var(--primary-navy);
+      border: 1.5px solid var(--primary-navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 
+        0 6px 16px rgba(0, 26, 77, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: #e8f0ff;
+      transform: translateY(-1px);
+      box-shadow: 
+        0 10px 24px rgba(0, 26, 77, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-secondary:active:not(:disabled) {
+      background: #dce5f7;
+      transform: translateY(1px);
+      box-shadow: 
+        0 4px 10px rgba(0, 26, 77, 0.1),
+        inset 0 2px 4px rgba(0, 26, 77, 0.08);
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+    }
+
+    .divider span {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px;
+      background: var(--primary-navy);
+      color: white;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .footer-text strong {
+      color: var(--accent-coral-light);
+      font-weight: 700;
+    }
+
+    .footer-qr {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qr-code {
+      width: 60px;
+      height: 60px;
+      background: white;
+      border-radius: 8px;
+      padding: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+    }
+
+    .qr-code:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+    }
+
+    .qr-label {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* QR Section */
+    .qr-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .qr-box {
+      width: 220px;
+      height: 220px;
+      background: var(--surface-white);
+      border: 2px solid var(--accent-coral);
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .qr-box:hover {
+      transform: scale(1.06) rotateZ(-1deg);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-navy-light);
+    }
+
+    .qr-code-content {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--surface-light) 0%, white 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+
+    .qr-tooltip {
+      opacity: 0;
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary-navy);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 26, 77, 0.3);
+    }
+
+    .qr-box:hover .qr-tooltip {
+      opacity: 1;
+    }
+
+    .qr-label {
+      text-align: center;
+    }
+
+    .qr-label h3 {
+      font-size: 18px;
+      color: var(--primary-navy);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .qr-label p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    /* Error Message */
+    .error-message {
+      padding: 14px 16px;
+      background: #ffe8e0;
+      border: 1.5px solid var(--accent-coral);
+      border-radius: 10px;
+      color: var(--accent-coral-dark);
+      font-size: 13px;
+      margin-bottom: 24px;
+      display: none;
+      font-weight: 500;
+      animation: slideDown 0.3s ease;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Loading Spinner */
+    .loading-spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Department Dropdown */
+    .department-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-top: 8px;
+      background: var(--surface-white);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+      z-index: 1000;
+      overflow: hidden;
+      display: none;
+      animation: slideDown 0.2s ease;
+    }
+
+    .department-dropdown.show {
+      display: block;
+    }
+
+    .department-option {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .department-option:last-child {
+      border-bottom: none;
+    }
+
+    .department-option:hover {
+      background: rgba(255, 107, 53, 0.08);
+      color: var(--accent-coral);
+      padding-left: 20px;
+    }
+
+    .department-icon {
+      font-size: 18px;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .helper-text {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 400;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+    .field-relative {
+      position: relative;
+    }
+
+    .form-footer-links {
+      text-align: center;
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1.5px solid var(--border-color);
+    }
+
+    .form-footer-links p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .form-footer-links a {
+      color: var(--accent-coral);
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .qr-box-wrap {
+      position: relative;
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-navy-light) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .loading-overlay-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      text-align: center;
+    }
+
+    .fpt-logo-spin {
+      width: 120px;
+      height: 120px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--accent-coral) 0%, var(--accent-coral-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 52px;
+      font-weight: 700;
+      color: white;
+      animation: spinLogo 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      box-shadow: 0 20px 60px rgba(255, 107, 53, 0.4);
+    }
+
+    @keyframes spinLogo {
+      0%, 100% {
+        transform: rotateY(0deg) scale(1);
+      }
+      50% {
+        transform: rotateY(360deg) scale(1.05);
+      }
+    }
+
+    .loading-text {
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .progress-bar {
+      width: 240px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-coral), var(--accent-coral-light));
+      border-radius: 2px;
+      animation: progress 2s ease-in-out infinite;
+    }
+
+    @keyframes progress {
+      0% {
+        width: 0%;
+      }
+      50% {
+        width: 100%;
+      }
+      100% {
+        width: 0%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-brand">
+      <div class="header-logo">🚗</div>
+      <div class="header-title">
+        <h1>Auto-UI</h1>
+        <p>Quyền Linh Design System</p>
+      </div>
+    </div>
+    <div class="header-spacer"></div>
+    <div class="header-info">
+      <p>SV FPT Automotive Translation Platform</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-container">
+    <div class="main-wrapper">
+      <!-- Left Column: Login Form -->
+      <div class="form-container">
+        <!-- Form Header -->
+        <div class="form-header">
+          <h2>Đăng Nhập</h2>
+          <p>Truy cập hệ thống dịch thuật chuyên ngành</p>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage"></div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+          <!-- Department Selector -->
+          <div class="form-group">
+            <label>Phòng Ban / Dự Án</label>
+            <div class="field-relative">
+              <select id="departmentSelect" onchange="selectDepartment()" title="Chọn phòng ban hoặc dự án">
+                <option value="automotive">🚗 Automotive</option>
+                <option value="hardware">💻 Hardware</option>
+                <option value="software">📱 Software</option>
+                <option value="ai">🤖 AI & Machine Learning</option>
+              </select>
+              <div class="department-dropdown" id="departmentDropdown">
+                <div class="department-option" onclick="selectOption('automotive', this)">
+                  <div class="department-icon">🚗</div>
+                  <span>Automotive</span>
+                </div>
+                <div class="department-option" onclick="selectOption('hardware', this)">
+                  <div class="department-icon">💻</div>
+                  <span>Hardware</span>
+                </div>
+                <div class="department-option" onclick="selectOption('software', this)">
+                  <div class="department-icon">📱</div>
+                  <span>Software</span>
+                </div>
+                <div class="department-option" onclick="selectOption('ai', this)">
+                  <div class="department-icon">🤖</div>
+                  <span>AI & Machine Learning</span>
+                </div>
+              </div>
+            </div>
+            <p class="helper-text">Dành cho sinh viên SV FPT Automotive - Đăng nhập bằng Email cá nhân hoặc FEID</p>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Nhập email của bạn"
+              required
+            />
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label>Mật Khẩu</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Nhập mật khẩu"
+              required
+            />
+          </div>
+
+          <!-- Forgot Password -->
+          <div class="forgot-password">
+            <a onclick="goToForgotPassword()">Quên mật khẩu?</a>
+          </div>
+
+          <!-- Login Button -->
+          <button type="submit" class="btn-neumorphic btn-primary" id="loginBtn">
+            ĐĂNG NHẬP
+          </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="divider">
+          <span>HOẶC</span>
+        </div>
+
+        <!-- Google Login Button -->
+        <button type="button" class="btn-neumorphic btn-google" onclick="handleGoogleLogin()">
+          <div class="google-icon">G</div>
+          <span>Đăng nhập với Google</span>
+        </button>
+
+        <!-- SV FPT Account Login -->
+        <button type="button" class="btn-neumorphic btn-secondary" onclick="loginWithFPT()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 8h18"/>
+          </svg>
+          Đăng nhập bằng tài khoản SV FPT
+        </button>
+
+        <!-- Footer Links -->
+        <div class="form-footer-links">
+          <p>
+            Chưa có tài khoản? <a onclick="goToRegister()">Đăng ký ngay</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: QR Code Section -->
+      <div class="qr-section">
+        <div class="support-badge">FPT Support</div>
+        <div class="qr-box-wrap">
+          <div class="support-qr-shell" title="Quét để mở kênh hỗ trợ kỹ thuật">
+            <img
+              id="supportQrImage"
+              alt="QR hỗ trợ kỹ thuật FPT"
+              src="https://api.qrserver.com/v1/create-qr-code/?size=176x176&data=https%3A%2F%2Fzalo.me%2Fg%2Fyour-project-support-group&color=001A4D&bgcolor=FFFFFF&margin=6&qzone=1"
+            />
+            <div class="support-qr-logo">FPT</div>
+            <div class="qr-tooltip">Quét để mở Zalo OA hoặc nhóm hỗ trợ dự án</div>
+          </div>
+        </div>
+        <div class="qr-label">
+          <h3 class="support-title">HỖ TRỢ KỸ THUẬT</h3>
+          <p class="support-subtitle">Quét mã để nhận hỗ trợ trực tiếp từ Lê Trọng Quyền Linh hoặc báo cáo lỗi dịch thuật</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-text">
+        Designed & Engineered by <strong>Lê Trọng Quyền Linh</strong> | SV FPT Automotive
+        <br>
+        © 2026 Quyền Linh Auto-UI Design System. All rights reserved.
+      </div>
+      <div class="footer-qr">
+        <a href="https://linkedin.com/in/quyenlinh" class="qr-code" title="Xem LinkedIn">🔗</a>
+        <span class="qr-label">Portfolio</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-overlay-content">
+      <div class="fpt-logo-spin">FPT</div>
+      <p class="loading-text">Đang tải giao diện...</p>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Loading Overlay Handler
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    
+    window.addEventListener('load', () => {
+      // Fade out loading overlay when page fully loads
+      setTimeout(() => {
+        loadingOverlay.style.opacity = '0';
+        loadingOverlay.style.pointerEvents = 'none';
+      }, 800);
+    });
+
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const errorMessage = document.getElementById('errorMessage');
+    const loginBtn = document.getElementById('loginBtn');
+    const departmentSelect = document.getElementById('departmentSelect');
+    const departmentDropdown = document.getElementById('departmentDropdown');
+    let googleCodeClient = null;
+
+    async function initializeGoogleLogin() {
+      try {
+        const response = await fetch('/api/auth/google-config', { cache: 'no-store' });
+        const data = await response.json();
+
+        if (!response.ok || !data.clientId) {
+          return;
+        }
+
+        if (!window.google || !window.google.accounts || !window.google.accounts.oauth2) {
+          console.warn('Google Identity Services script not loaded');
+          return;
+        }
+
+        googleCodeClient = window.google.accounts.oauth2.initCodeClient({
+          client_id: data.clientId,
+          scope: 'openid email profile',
+          ux_mode: 'popup',
+          callback: handleGoogleCodeResponse,
+        });
+      } catch (error) {
+        console.error('Failed to initialize Google Login:', error);
+      }
+    }
+
+    function handleGoogleLogin() {
+      errorMessage.classList.remove('show');
+
+      if (!googleCodeClient) {
+        errorMessage.textContent = 'Google Sign-In chưa được cấu hình. Vui lòng kiểm tra GOOGLE_CLIENT_ID.';
+        errorMessage.classList.add('show');
+        return;
+      }
+
+      googleCodeClient.requestCode({ prompt: 'select_account' });
+    }
+
+    async function handleGoogleCodeResponse(codeResponse) {
+      if (!codeResponse || !codeResponse.code) {
+        errorMessage.textContent = 'Không nhận được mã xác thực từ Google.';
+        errorMessage.classList.add('show');
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/auth/google/code', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            code: codeResponse.code,
+            department: departmentSelect.value,
+          }),
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || 'Đăng nhập Google thất bại');
+        }
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('selectedDepartment', departmentSelect.value);
+        window.location.href = 'web.html';
+      } catch (error) {
+        errorMessage.textContent = error.message;
+        errorMessage.classList.add('show');
+      }
+    }
+
+    // Department dropdown functionality
+    departmentSelect.addEventListener('click', (e) => {
+      e.stopPropagation();
+      departmentDropdown.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+      departmentDropdown.classList.remove('show');
+    });
+
+    window.selectOption = (value, element) => {
+      departmentSelect.value = value;
+      departmentDropdown.classList.remove('show');
+    };
+
+    window.selectDepartment = () => {
+      const selected = departmentSelect.value;
+      localStorage.setItem('selectedDepartment', selected);
+    };
+
+    // Login form submission
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      const department = departmentSelect.value;
+
+      errorMessage.classList.remove('show');
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<div class="loading-spinner"></div>';
+
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, department })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Đăng nhập thất bại');
+        }
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('selectedDepartment', department);
+
+        window.location.href = 'web.html';
+      } catch (error) {
+        errorMessage.textContent = error.message;
+        errorMessage.classList.add('show');
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'ĐĂNG NHẬP';
+      }
+    });
+
+    function goToRegister() {
+      window.location.href = 'register.html';
+    }
+
+    function goToForgotPassword() {
+      window.location.href = 'forgot-password.html';
+    }
+
+    function loginWithFPT() {
+      alert('SV FPT Account integration coming soon!');
+    }
+
+    window.addEventListener('load', () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        window.location.href = 'web.html';
+      }
+
+      const savedDept = localStorage.getItem('selectedDepartment');
+      if (savedDept) {
+        departmentSelect.value = savedDept;
+      }
+
+      initializeGoogleLogin();
+    });
+
+    departmentSelect.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        departmentDropdown.classList.add('show');
+      } else if (e.key === 'Escape') {
+        departmentDropdown.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>

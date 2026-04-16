@@ -1,0 +1,1390 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Admin - AutoTranslate Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/i18next@23.16.4/dist/umd/i18next.min.js"></script>
+  <style>
+    :root {
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Source Sans 3', sans-serif;
+      --color-bg-dark: #0f172a;
+      --color-panel-dark: #1a1a2e;
+      --color-text-dark: #e2e8f0;
+      --color-border-dark: #334155;
+      --fpt-blue: #0056b3;
+    }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-bg-dark);
+      color: var(--color-text-dark);
+    }
+    body.theme-light {
+      background-color: #eaf1fb;
+      color: #0f172a;
+    }
+    body.theme-light .top-nav {
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid #cbd5e1;
+    }
+    body.theme-light .top-tab-btn { color: #334155; }
+    body.theme-light .top-tab-btn:hover { background: #dbeafe; color: #1e3a8a; border-color: #93c5fd; }
+    body.theme-light .top-tab-btn.active { background: #2563eb; color: #ffffff; border-color: #1d4ed8; }
+    body.theme-light .metric-card,
+    body.theme-light .bg-slate-900,
+    body.theme-light .rounded-lg.border,
+    body.theme-light .rounded-xl.border,
+    body.theme-light .rounded-2xl.border {
+      background: #ffffff !important;
+      color: #0f172a;
+      border-color: #cbd5e1 !important;
+    }
+    body.theme-light .text-slate-100,
+    body.theme-light .text-slate-200,
+    body.theme-light .text-slate-300,
+    body.theme-light .text-slate-400,
+    body.theme-light .text-slate-500 { color: #334155 !important; }
+    body.theme-light .pill { background: #ffffff; color: #0f172a; border-color: #cbd5e1; }
+    .top-nav { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); background: rgba(9, 18, 37, 0.92); border-bottom: 1px solid #1e293b; }
+    .panel-width-wide { width: 95%; margin: 0 auto; }
+    .toolbar-width-wide { width: 95%; margin: 0 auto 1rem; }
+    .toolbar-width-centered { width: 95%; margin-left: auto; margin-right: auto; }
+    .tab-pane { display: none; width: 94%; margin: 0 auto; }
+    .tab-pane.active { display: block; }
+    .top-tab-btn { background: transparent; color: #cbd5e1; border: 1px solid transparent; margin-top: 0; }
+    .top-tab-btn:hover { background: #172554; color: #dbeafe; border-color: #1e3a8a; }
+    .top-tab-btn.active { background: #1e3a8a; color: #eff6ff; border-color: #2563eb; }
+    .metric-card { background: linear-gradient(135deg, #1a3a52 0%, #0f172a 100%); border: 1px solid var(--color-border-dark); border-radius: 0.5rem; padding: 1rem; }
+    .metric-value { font-size: 1.875rem; font-weight: bold; color: #3b82f6; }
+    .metric-label { font-size: 0.875rem; color: #94a3b8; margin-top: 0.5rem; }
+    .alert-warning { background-color: #7c2d12; border-left: 4px solid #ea8600; padding: 1rem; border-radius: 0.375rem; margin-bottom: 1rem; }
+    .alert-warning p { color: #fcd34d; margin: 0; }
+    table { width: 100%; border-collapse: collapse; }
+    table th { background-color: #0b1220; text-align: left; padding: 0.75rem; border-bottom: 1px solid #1e293b; }
+    table td { padding: 0.75rem; border-bottom: 1px solid #1e293b; }
+    table tr:nth-child(even) { background-color: #111827; }
+    .pro-table th { position: sticky; top: 0; z-index: 10; }
+    .pro-table td, .pro-table th { white-space: nowrap; }
+    input, textarea, select { background-color: #0b1220; color: #f8fafc; border: 1px solid #475569; border-radius: 0.375rem; padding: 0.5rem; margin-bottom: 1rem; width: 100%; }
+    button { background-color: var(--fpt-blue); color: white; padding: 0.5rem 1rem; border: none; border-radius: 0.375rem; cursor: pointer; font-weight: 600; margin-top: 0.5rem; }
+    button:hover { background-color: #0041a0; }
+    button.secondary { background-color: #475569; }
+    button.secondary:hover { background-color: #64748b; }
+    button.danger { background-color: #dc2626; }
+    button.danger:hover { background-color: #b91c1c; }
+    .status-dot { width: 8px; height: 8px; border-radius: 9999px; background: #22c55e; animation: pulseStatus 1.8s infinite; }
+    @keyframes pulseStatus {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+    .logout-icon-btn { background: transparent; border: 1px solid #334155; color: #f1f5f9; padding: 0.5rem; border-radius: 0.5rem; }
+    .logout-icon-btn:hover { background: #1e293b; border-color: #475569; }
+    .main-content-wrap { width: 100%; padding: 1.5rem 1.75rem; }
+    .soft-card {
+      background: #0b1220;
+      border: 1px solid #1e293b;
+      border-radius: 14px;
+      box-shadow: 0 14px 35px -22px rgba(15, 23, 42, 0.72);
+    }
+    .soft-card.padded { padding: 1rem; }
+    .table-wrap {
+      width: 95%;
+      margin: 0 auto;
+      border-radius: 14px;
+      overflow: auto;
+      border: 1px solid #1e293b;
+      max-height: 540px;
+      background: #0b1220;
+      box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.03);
+    }
+    table tr { transition: background-color 0.18s ease; }
+    table tr:hover { background-color: rgba(30, 64, 175, 0.18); }
+    .data-toolbar { display: grid; grid-template-columns: 1fr auto auto; gap: 0.75rem; align-items: center; }
+    .pill { border: 1px solid #334155; background: #0f172a; color: #e2e8f0; border-radius: 0.5rem; padding: 0.5rem 0.75rem; margin-bottom: 0; }
+    .user-menu-wrap { position: relative; }
+    .user-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 290px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 16px 36px -20px rgba(15, 23, 42, 0.85);
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      overflow: hidden;
+      z-index: 90;
+    }
+    .user-dropdown.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .user-menu-item {
+      width: 100%;
+      text-align: left;
+      border-radius: 0;
+      margin: 0;
+      border: 0;
+      background: transparent;
+      color: #e2e8f0;
+      padding: 0.75rem 0.9rem;
+    }
+    .user-menu-item:hover { background: #1e293b; }
+    .user-menu-item.logout { color: #fca5a5; }
+    .user-menu-item.logout:hover { background: rgba(220, 38, 38, 0.18); color: #fecaca; }
+    .progress-shell {
+      width: 95%;
+      margin-top: 1rem;
+      background: #1e293b;
+      border-radius: 999px;
+      height: 12px;
+      overflow: hidden;
+      border: 1px solid #334155;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0ea5e9, #22c55e);
+      transition: width 0.18s linear;
+    }
+    body.theme-light .soft-card,
+    body.theme-light .table-wrap,
+    body.theme-light .user-dropdown {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      box-shadow: 0 14px 35px -22px rgba(15, 23, 42, 0.28);
+    }
+    body.theme-light table tr:nth-child(even) { background-color: #f8fafc; }
+    body.theme-light table tr:hover { background-color: #e0ecff; }
+    body.theme-light .user-menu-item { color: #0f172a; }
+    body.theme-light .user-menu-item:hover { background: #eff6ff; }
+    body.theme-light .progress-shell { background: #e2e8f0; border-color: #cbd5e1; }
+    .toast-notification {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 70;
+      border: 1px solid #334155;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 12px 30px -18px rgba(15, 23, 42, 0.8);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+    .toast-notification.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="flex">
+  <!-- Auth Lock Screen -->
+  <div id="authLockScreen" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/95 backdrop-blur-md">
+    <div class="w-full max-w-md p-8 rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-blue-400 mb-2">🔐 Admin Access</h1>
+        <p class="text-slate-400">AutoTranslate Pro Dashboard</p>
+      </div>
+      <form id="authForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-semibold text-slate-200 mb-2">Nhập mã khóa</label>
+          <input 
+            type="password" 
+            id="authKeyInput" 
+            placeholder="Mã khóa bí mật..." 
+            class="w-full rounded-lg border border-slate-600 bg-slate-800 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-blue-500 focus:outline-none transition"
+            autocomplete="off"
+          />
+        </div>
+        <div id="authError" class="hidden rounded-lg bg-red-900/30 border border-red-700 px-4 py-2 text-sm text-red-300"></div>
+        <button 
+          type="submit" 
+          class="w-full rounded-lg bg-blue-600 hover:bg-blue-500 px-4 py-3 font-bold text-white transition"
+        >
+          🔓 Mở Khóa Dashboard
+        </button>
+      </form>
+      <p class="text-center text-xs text-slate-500 mt-6">
+        Liên hệ: Lê Trọng Quyền Linh
+      </p>
+    </div>
+  </div>
+
+  <!-- Main Dashboard (Hidden until auth) -->
+  <div id="mainDashboard" class="hidden w-full min-h-screen">
+    <header class="top-nav fixed top-0 left-0 right-0 z-40">
+      <div class="mx-auto flex w-full items-center justify-between px-6 py-3">
+        <div class="flex items-center gap-3">
+          <button id="backToTranslatorButton" class="top-tab-btn px-3 py-2 rounded-md" data-i18n="backTranslator">← Quay lại Trang Dịch</button>
+          <div>
+            <h1 class="text-lg font-bold text-blue-300" data-i18n="appName">AutoTranslate Admin</h1>
+            <p class="text-xs text-slate-400">Lê Trọng Quyền Linh</p>
+          </div>
+          <div class="hidden md:flex items-center gap-2 rounded bg-slate-800/80 border border-slate-700 px-2 py-1">
+            <span class="status-dot"></span>
+            <span class="text-xs text-green-300 font-semibold" data-i18n="serverOnline">Server Status: Online</span>
+          </div>
+        </div>
+        <nav class="hidden lg:flex items-center gap-2">
+          <button onclick="switchTab('metrics')" class="top-tab-btn tab-nav px-3 py-2 rounded-md" data-tab="metrics" data-i18n="navMetrics">Metrics</button>
+          <button onclick="switchTab('pending')" class="top-tab-btn tab-nav px-3 py-2 rounded-md" data-tab="pending" data-i18n="navPending">Pending Terms</button>
+          <button onclick="switchTab('crud')" class="top-tab-btn tab-nav px-3 py-2 rounded-md" data-tab="crud" data-i18n="navCrud">CRUD Terms</button>
+          <button onclick="switchTab('feedback')" class="top-tab-btn tab-nav px-3 py-2 rounded-md" data-tab="feedback" data-i18n="navFeedback">Feedback Log</button>
+          <button onclick="switchTab('export')" class="top-tab-btn tab-nav px-3 py-2 rounded-md" data-tab="export" data-i18n="navExport">Export Data</button>
+        </nav>
+        <div class="flex items-center gap-2">
+          <button id="themeSyncToggle" class="top-tab-btn px-3 py-2 rounded-md" title="Theme">🌓</button>
+          <select id="languageSelect" class="pill w-[130px]" title="Chọn ngôn ngữ giao diện" aria-label="Chọn ngôn ngữ giao diện">
+            <option value="vi">Tiếng Việt</option>
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+          </select>
+          <div class="user-menu-wrap" id="userMenuWrap">
+            <button id="userMenuButton" class="logout-icon-btn" data-i18n-title="userMenu" title="User Menu">👤</button>
+            <div id="userDropdown" class="user-dropdown">
+              <div class="px-4 py-3 border-b border-slate-700">
+                <p class="text-sm text-slate-400" data-i18n="accountLabel">Tài khoản</p>
+                <p class="font-semibold text-slate-100">Lê Trọng Quyền Linh</p>
+              </div>
+              <button id="setAdminKeyButton" class="user-menu-item" data-i18n="setAdminKey">🔐 Cài đặt Admin Key</button>
+              <button id="logoutMenuButton" class="user-menu-item logout" data-i18n="logout">⏻ Đăng xuất</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lg:hidden px-4 pb-3">
+        <div class="grid grid-cols-3 gap-2">
+          <button onclick="switchTab('metrics')" class="top-tab-btn tab-nav px-3 py-2 rounded-md" data-tab="metrics" data-i18n="navMetrics">Metrics</button>
+          <button onclick="switchTab('pending')" class="top-tab-btn tab-nav px-3 py-2 rounded-md" data-tab="pending" data-i18n="navPending">Pending Terms</button>
+          <button onclick="switchTab('crud')" class="top-tab-btn tab-nav px-3 py-2 rounded-md" data-tab="crud" data-i18n="navCrud">CRUD Terms</button>
+          <button onclick="switchTab('feedback')" class="top-tab-btn tab-nav px-3 py-2 rounded-md" data-tab="feedback" data-i18n="navFeedback">Feedback Log</button>
+          <button onclick="switchTab('export')" class="top-tab-btn tab-nav px-3 py-2 rounded-md" data-tab="export" data-i18n="navExport">Export Data</button>
+        </div>
+      </div>
+    </header>
+
+  <!-- Main Content Area -->
+  <main class="main-content-wrap pt-28 lg:pt-24">
+    <!-- Metrics Tab -->
+    <div id="metrics-tab" class="tab-pane active p-8">
+      <h2 class="text-3xl font-bold mb-6" data-i18n="metricsTitle">System Metrics</h2>
+      <div id="metricsAlerts" class="mb-4"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+        <div class="metric-card">
+          <div class="metric-value" id="metricsTranslationCount" data-counter>0</div>
+          <div class="metric-label" data-i18n="metricWordsToday">Từ dịch hôm nay</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="metricsErrorRate" data-counter>0%</div>
+          <div class="metric-label" data-i18n="metricErrorRate">Tỉ lệ lỗi API</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="metricsResponseTime" data-counter>0ms</div>
+          <div class="metric-label" data-i18n="metricAvgResponse">Response time trung bình</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="metricsRequestsLastHour" data-counter>0</div>
+          <div class="metric-label" data-i18n="metricLastHour">Requests giờ cuối (limit: 1000)</div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+        <div class="xl:col-span-2 bg-slate-900 border border-slate-700 rounded-lg p-4">
+          <h3 class="text-lg font-bold mb-3 text-slate-100">Lưu lượng dịch thuật 24 giờ qua</h3>
+          <canvas id="trafficLineChart" height="120"></canvas>
+        </div>
+        <div class="bg-slate-900 border border-slate-700 rounded-lg p-4">
+          <h3 class="text-lg font-bold mb-3 text-slate-100">Tỉ lệ nguồn dịch (ASI101 vs AI)</h3>
+          <canvas id="sourcePieChart" height="220"></canvas>
+        </div>
+      </div>
+      <button onclick="refreshMetrics()" class="bg-green-600 hover:bg-green-500" data-i18n="refreshMetrics">🔄 Refresh Metrics</button>
+    </div>
+
+    <!-- Pending Terms Tab -->
+    <div id="pending-tab" class="tab-pane p-8">
+      <h2 class="text-3xl font-bold mb-6" data-i18n="pendingTitle">Pending Terms for Approval</h2>
+      <div class="flex items-center gap-3 mb-4">
+        <button onclick="bulkApproveSelected()" class="bg-green-600 hover:bg-green-500" data-i18n="bulkApprove">✅ Bulk Approve</button>
+        <button onclick="refreshPendingTerms()" class="bg-sky-600 hover:bg-sky-500" data-i18n="refresh">🔄 Refresh</button>
+        <span id="pendingBulkStatus" class="text-sm text-slate-400"></span>
+      </div>
+      <div class="table-wrap">
+        <table class="pro-table text-sm w-full">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="pendingSelectAll" /></th>
+              <th data-i18n="colOriginalTerm">Thuật ngữ gốc</th>
+              <th data-i18n="colAiSuggestion">Kết quả AI đề xuất</th>
+              <th data-i18n="colSystem">Hệ thống</th>
+              <th>Confidence</th>
+              <th data-i18n="colAction">Hành động</th>
+            </tr>
+          </thead>
+          <tbody id="pendingTermsList"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CRUD Terms Tab -->
+    <div id="crud-tab" class="tab-pane p-8">
+      <h2 class="text-3xl font-bold mb-6" data-i18n="crudTitle">CRUD ASI101 Terms</h2>
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 soft-card padded">
+        <div>
+          <h3 class="text-xl font-semibold mb-4" data-i18n="crudFormTitle">Thêm/Sửa Thuật Ngữ</h3>
+          <input type="text" id="crudTermKey" placeholder="Term Key (tạo mới nếu trống)" />
+          <input type="text" id="crudEnglish" placeholder="English" />
+          <input type="text" id="crudVietnamese" placeholder="Vietnamese" />
+          <input type="text" id="crudJapaneseKanji" placeholder="Japanese (Kanji)" />
+          <input type="text" id="crudJapaneseRomaji" placeholder="Japanese (Romaji)" />
+          <input type="text" id="crudChinese" placeholder="Chinese (Simplified)" />
+          <input type="text" id="crudCategory" placeholder="Category (JSON: {key, vi, en})" />
+          <div class="flex gap-2">
+            <button onclick="crudOperation('create')" class="flex-1 bg-green-600 hover:bg-green-500" data-i18n="btnCreate">➕ Tạo</button>
+            <button onclick="crudOperation('update')" class="flex-1 bg-yellow-600 hover:bg-yellow-500" data-i18n="btnUpdate">✏️ Sửa</button>
+            <button onclick="crudOperation('delete')" class="flex-1 bg-red-600 hover:bg-red-500" data-i18n="btnDelete">🗑️ Xóa</button>
+          </div>
+          <p id="crudStatus" class="text-green-400 mt-2"></p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold mb-4" data-i18n="previewTitle">Current Dictionary Preview</h3>
+          <div id="dictionaryPreview" class="h-96 overflow-y-auto bg-slate-900 p-4 rounded border border-slate-700 text-sm font-mono"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feedback Tab -->
+    <div id="feedback-tab" class="tab-pane p-8">
+      <h2 class="text-3xl font-bold mb-6" data-i18n="feedbackTitle">User Feedback Log</h2>
+      <div class="data-toolbar mb-4 soft-card padded toolbar-width-wide">
+        <input id="feedbackSearchInput" type="text" class="pill" data-i18n-placeholder="searchPlaceholder" placeholder="Search..." />
+        <select id="feedbackPriorityFilter" class="pill w-64 !mb-0" onchange="refreshFeedback()">
+          <option value="all" data-i18n="prioAll">Tất cả mức độ</option>
+          <option value="error" data-i18n="prioError">Lỗi dịch sai</option>
+          <option value="display" data-i18n="prioDisplay">Lỗi hiển thị</option>
+          <option value="suggestion" data-i18n="prioSuggestion">Góp ý thuật ngữ mới</option>
+        </select>
+        <button onclick="refreshFeedback()" class="bg-green-600 hover:bg-green-500" data-i18n="refresh">🔄 Refresh</button>
+      </div>
+      <div class="table-wrap">
+        <table class="pro-table text-sm w-full">
+          <thead>
+            <tr>
+              <th><button class="top-tab-btn" onclick="setFeedbackSort('timestamp')" data-i18n="colTime">Thời gian</button></th>
+              <th><button class="top-tab-btn" onclick="setFeedbackSort('feedbackType')" data-i18n="colPriority">Mức độ</button></th>
+              <th><button class="top-tab-btn" onclick="setFeedbackSort('sourceText')" data-i18n="colWrongWord">Từ lỗi</button></th>
+              <th><button class="top-tab-btn" onclick="setFeedbackSort('translatedText')" data-i18n="colTranslation">Bản dịch</button></th>
+              <th data-i18n="colDetail">Chi tiết</th>
+              <th data-i18n="colQuickFix">Sửa nhanh</th>
+            </tr>
+          </thead>
+          <tbody id="feedbackList"></tbody>
+        </table>
+      </div>
+      <div class="mt-3 flex items-center justify-between gap-3 toolbar-width-centered">
+        <p id="feedbackPaginationInfo" class="text-sm text-slate-400"></p>
+        <div class="flex items-center gap-2">
+          <button onclick="changeFeedbackPage(-1)" class="secondary" data-i18n="prev">Prev</button>
+          <button onclick="changeFeedbackPage(1)" class="secondary" data-i18n="next">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Export Tab -->
+    <div id="export-tab" class="tab-pane p-8">
+      <h2 class="text-3xl font-bold mb-6" data-i18n="exportTitle">Export Data</h2>
+      <div class="soft-card padded panel-width-wide">
+        <p class="mb-4 text-slate-400" data-i18n="exportGuide">Xuất dữ liệu từ điển ra file CSV (Excel)</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="exportMode" value="all" checked><span data-i18n="exportAll">Xuất toàn bộ dữ liệu</span></label>
+          <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="exportMode" value="ai"><span data-i18n="exportAiOnly">Chỉ xuất thuật ngữ mới từ AI</span></label>
+          <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="exportMode" value="system"><span data-i18n="exportBySystem">Xuất theo hệ thống chuyên ngành</span></label>
+          <select id="exportSystemSelect" class="pill !mb-0">
+            <option value="engine" data-i18n="systemEngine">Engine</option>
+            <option value="chassis" data-i18n="systemChassis">Chassis</option>
+            <option value="general" data-i18n="systemGeneral">General</option>
+          </select>
+        </div>
+        <button onclick="exportDictionary()" class="bg-green-600 hover:bg-green-500 px-6 py-3 text-base font-bold" data-i18n="btnDownloadCsv">📥 Download CSV Dictionary</button>
+        <div id="exportProgressShell" class="progress-shell hidden"><div id="exportProgressFill" class="progress-fill"></div></div>
+      </div>
+      <p id="exportStatus" class="text-green-400 mt-4"></p>
+    </div>
+  </main>
+  <div id="adminToast" class="toast-notification"></div>
+
+  <script>
+    let adminSessionToken = sessionStorage.getItem('admin-session-token');
+    let trafficLineChart = null;
+    let sourcePieChart = null;
+    let currentPendingTerms = [];
+    const languageSelect = document.getElementById('languageSelect');
+    const themeSyncToggle = document.getElementById('themeSyncToggle');
+    const backToTranslatorButton = document.getElementById('backToTranslatorButton');
+    const adminToast = document.getElementById('adminToast');
+    const userMenuWrap = document.getElementById('userMenuWrap');
+    const userMenuButton = document.getElementById('userMenuButton');
+    const userDropdown = document.getElementById('userDropdown');
+    const setAdminKeyButton = document.getElementById('setAdminKeyButton');
+    const logoutMenuButton = document.getElementById('logoutMenuButton');
+    const exportSystemSelect = document.getElementById('exportSystemSelect');
+    const exportProgressShell = document.getElementById('exportProgressShell');
+    const exportProgressFill = document.getElementById('exportProgressFill');
+    const feedbackSearchInput = document.getElementById('feedbackSearchInput');
+    const feedbackPaginationInfo = document.getElementById('feedbackPaginationInfo');
+
+    const i18nResources = {
+      vi: { translation: {
+        appName: 'AutoTranslate Admin',
+        serverOnline: 'Server Status: Online',
+        navMetrics: 'Metrics', navPending: 'Pending Terms', navCrud: 'CRUD Terms', navFeedback: 'Feedback Log', navExport: 'Export Data',
+        metricsTitle: 'System Metrics',
+        metricWordsToday: 'Từ dịch hôm nay', metricErrorRate: 'Tỉ lệ lỗi API', metricAvgResponse: 'Response time trung bình', metricLastHour: 'Requests giờ cuối (limit: 1000)',
+        refreshMetrics: '🔄 Refresh Metrics',
+        pendingTitle: 'Pending Terms for Approval',
+        colOriginalTerm: 'Thuật ngữ gốc', colAiSuggestion: 'Kết quả AI đề xuất', colSystem: 'Hệ thống', colAction: 'Hành động',
+        crudTitle: 'CRUD ASI101 Terms',
+        feedbackTitle: 'User Feedback Log',
+        searchPlaceholder: 'Tìm kiếm feedback...',
+        prioAll: 'Tất cả mức độ', prioError: 'Lỗi dịch sai', prioDisplay: 'Lỗi hiển thị', prioSuggestion: 'Góp ý thuật ngữ mới',
+        refresh: '🔄 Refresh',
+        bulkApprove: '✅ Duyệt hàng loạt',
+        crudFormTitle: 'Thêm/Sửa Thuật Ngữ',
+        btnCreate: '➕ Tạo', btnUpdate: '✏️ Sửa', btnDelete: '🗑️ Xóa',
+        btnDownloadCsv: '📥 Tải CSV Dictionary',
+        colTime: 'Thời gian', colPriority: 'Mức độ', colWrongWord: 'Từ lỗi', colTranslation: 'Bản dịch', colDetail: 'Chi tiết', colQuickFix: 'Sửa nhanh',
+        prev: 'Trước', next: 'Sau',
+        backTranslator: '← Quay lại Trang Dịch',
+        exportTitle: 'Export Data',
+        exportGuide: 'Xuất dữ liệu từ điển ra file CSV (Excel)',
+        exportAll: 'Xuất toàn bộ dữ liệu',
+        exportAiOnly: 'Chỉ xuất thuật ngữ mới từ AI',
+        exportBySystem: 'Xuất theo hệ thống chuyên ngành',
+        systemEngine: 'Engine',
+        systemChassis: 'Chassis',
+        systemGeneral: 'General',
+        previewTitle: 'Current Dictionary Preview',
+        userMenu: 'Menu người dùng',
+        accountLabel: 'Tài khoản',
+        setAdminKey: '🔐 Cài đặt Admin Key',
+        logout: '⏻ Đăng xuất',
+        setAdminKeyPrompt: 'Nhập Admin Key mới:',
+        setAdminKeySuccess: 'Đã cập nhật Admin Key thành công.',
+        setAdminKeyFailed: 'Admin Key không hợp lệ.',
+        exportPreparing: 'Đang khởi tạo file CSV, vui lòng chờ...',
+        exportDone: 'File đã tải xuống thành công',
+        noFeedback: 'Không có feedback nào.',
+        noFeedbackMatch: 'Không có feedback phù hợp.',
+        noPending: 'Không có từ nào chờ duyệt.',
+      }},
+      en: { translation: {
+        appName: 'AutoTranslate Admin',
+        serverOnline: 'Server Status: Online',
+        navMetrics: 'Metrics', navPending: 'Pending Terms', navCrud: 'CRUD Terms', navFeedback: 'Feedback Log', navExport: 'Export Data',
+        metricsTitle: 'System Metrics',
+        metricWordsToday: 'Words translated today', metricErrorRate: 'API error rate', metricAvgResponse: 'Average response time', metricLastHour: 'Requests last hour (limit: 1000)',
+        refreshMetrics: '🔄 Refresh Metrics',
+        pendingTitle: 'Pending Terms for Approval',
+        colOriginalTerm: 'Original term', colAiSuggestion: 'AI suggestion', colSystem: 'System', colAction: 'Action',
+        crudTitle: 'CRUD ASI101 Terms',
+        feedbackTitle: 'User Feedback Log',
+        searchPlaceholder: 'Search feedback...',
+        prioAll: 'All priorities', prioError: 'Wrong translation', prioDisplay: 'Display issue', prioSuggestion: 'New term suggestion',
+        refresh: '🔄 Refresh',
+        bulkApprove: '✅ Bulk Approve',
+        crudFormTitle: 'Add/Edit Term',
+        btnCreate: '➕ Create', btnUpdate: '✏️ Update', btnDelete: '🗑️ Delete',
+        btnDownloadCsv: '📥 Download CSV Dictionary',
+        colTime: 'Time', colPriority: 'Priority', colWrongWord: 'Reported term', colTranslation: 'Translation', colDetail: 'Detail', colQuickFix: 'Quick fix',
+        prev: 'Prev', next: 'Next',
+        backTranslator: '← Back to Translator',
+        exportTitle: 'Export Data',
+        exportGuide: 'Export dictionary data to CSV (Excel).',
+        exportAll: 'Export all data',
+        exportAiOnly: 'Only export AI-generated terms',
+        exportBySystem: 'Export by specialized system',
+        systemEngine: 'Engine',
+        systemChassis: 'Chassis',
+        systemGeneral: 'General',
+        previewTitle: 'Current Dictionary Preview',
+        userMenu: 'User menu',
+        accountLabel: 'Account',
+        setAdminKey: '🔐 Set Admin Key',
+        logout: '⏻ Logout',
+        setAdminKeyPrompt: 'Enter a new Admin Key:',
+        setAdminKeySuccess: 'Admin Key updated successfully.',
+        setAdminKeyFailed: 'Invalid Admin Key.',
+        exportPreparing: 'Preparing CSV file, please wait...',
+        exportDone: 'CSV file downloaded successfully.',
+        noFeedback: 'No feedback available.',
+        noFeedbackMatch: 'No feedback matches your filter.',
+        noPending: 'No pending terms.',
+      }},
+      ja: { translation: {
+        appName: 'AutoTranslate Admin',
+        serverOnline: 'Server Status: Online',
+        navMetrics: 'メトリクス', navPending: '保留用語', navCrud: 'CRUD用語', navFeedback: 'フィードバック', navExport: 'エクスポート',
+        metricsTitle: 'システムメトリクス',
+        metricWordsToday: '本日の翻訳数', metricErrorRate: 'APIエラー率', metricAvgResponse: '平均応答時間', metricLastHour: '直近1時間のリクエスト (limit: 1000)',
+        refreshMetrics: '🔄 更新',
+        pendingTitle: '承認待ち用語',
+        colOriginalTerm: '原文', colAiSuggestion: 'AI提案', colSystem: 'システム', colAction: '操作',
+        crudTitle: 'CRUD ASI101 用語',
+        feedbackTitle: 'ユーザーフィードバック',
+        searchPlaceholder: 'フィードバック検索...',
+        prioAll: 'すべて', prioError: '誤訳', prioDisplay: '表示不具合', prioSuggestion: '新規用語提案',
+        refresh: '🔄 更新',
+        bulkApprove: '✅ 一括承認',
+        crudFormTitle: '用語の追加/編集',
+        btnCreate: '➕ 作成', btnUpdate: '✏️ 更新', btnDelete: '🗑️ 削除',
+        btnDownloadCsv: '📥 CSVをダウンロード',
+        colTime: '時間', colPriority: '優先度', colWrongWord: '報告用語', colTranslation: '翻訳', colDetail: '詳細', colQuickFix: '修正',
+        prev: '前へ', next: '次へ',
+        backTranslator: '← 翻訳ページに戻る',
+        exportTitle: 'データ出力',
+        exportGuide: '辞書データをCSV（Excel）として出力します。',
+        exportAll: 'すべてのデータを出力',
+        exportAiOnly: 'AI新規用語のみ出力',
+        exportBySystem: '専門システム別に出力',
+        systemEngine: 'Engine',
+        systemChassis: 'Chassis',
+        systemGeneral: 'General',
+        previewTitle: 'Current Dictionary Preview',
+        userMenu: 'ユーザーメニュー',
+        accountLabel: 'アカウント',
+        setAdminKey: '🔐 管理キー設定',
+        logout: '⏻ ログアウト',
+        setAdminKeyPrompt: '新しいAdmin Keyを入力してください:',
+        setAdminKeySuccess: 'Admin Keyを更新しました。',
+        setAdminKeyFailed: 'Admin Keyが無効です。',
+        exportPreparing: 'CSVファイルを準備中です。しばらくお待ちください...',
+        exportDone: 'CSVファイルのダウンロードが完了しました。',
+        noFeedback: 'フィードバックはありません。',
+        noFeedbackMatch: '一致するフィードバックはありません。',
+        noPending: '承認待ち用語はありません。',
+      }},
+    };
+
+    let currentLang = localStorage.getItem('admin-lang') || 'vi';
+    const feedbackState = {
+      all: [],
+      filtered: [],
+      page: 1,
+      pageSize: 8,
+      sortKey: 'timestamp',
+      sortDir: 'desc',
+    };
+
+    function t(key) {
+      if (window.i18next?.isInitialized) return i18next.t(key);
+      return i18nResources[currentLang]?.translation?.[key] || i18nResources.vi.translation[key] || key;
+    }
+
+    async function initI18n() {
+      await i18next.init({
+        lng: currentLang,
+        fallbackLng: 'vi',
+        resources: i18nResources,
+        interpolation: { escapeValue: false },
+      });
+    }
+
+    function applyI18n() {
+      document.documentElement.lang = currentLang;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        el.textContent = t(el.getAttribute('data-i18n'));
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+        el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+      });
+      document.querySelectorAll('[data-i18n-title]').forEach((el) => {
+        el.title = t(el.getAttribute('data-i18n-title'));
+      });
+    }
+
+    function showAdminToast(message) {
+      if (!adminToast) return;
+      adminToast.textContent = message;
+      adminToast.classList.add('show');
+      clearTimeout(showAdminToast._timer);
+      showAdminToast._timer = setTimeout(() => adminToast.classList.remove('show'), 2600);
+    }
+
+    function applySyncedTheme(mode) {
+      const resolved = mode === 'dark' ? 'dark' : 'light';
+      document.body.classList.toggle('theme-light', resolved !== 'dark');
+    }
+
+    function loadSyncedTheme() {
+      const saved = localStorage.getItem('autotranslate-theme') || 'dark';
+      applySyncedTheme(saved);
+    }
+
+    function setLanguage(lang) {
+      if (!i18nResources[lang]) return;
+      currentLang = lang;
+      localStorage.setItem('admin-lang', lang);
+      if (window.i18next?.isInitialized) {
+        i18next.changeLanguage(lang);
+      }
+      applyI18n();
+      refreshFeedback();
+      refreshPendingTerms();
+    }
+
+    function toggleUserMenu(forceOpen = null) {
+      if (!userDropdown) return;
+      const shouldOpen = forceOpen === null ? !userDropdown.classList.contains('open') : forceOpen;
+      userDropdown.classList.toggle('open', shouldOpen);
+    }
+
+    async function updateAdminKeyFromMenu() {
+      const key = window.prompt(t('setAdminKeyPrompt'));
+      if (!key) return;
+      const ok = await performLogin(key);
+      if (ok) {
+        showAdminToast(t('setAdminKeySuccess'));
+      } else {
+        showAdminToast(t('setAdminKeyFailed'));
+      }
+    }
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function animateCounter(elementId, targetValue, suffix = '') {
+      const element = document.getElementById(elementId);
+      const numericTarget = Number(targetValue) || 0;
+      const duration = 700;
+      const start = performance.now();
+
+      function update(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const value = Math.round(numericTarget * progress);
+        element.textContent = `${value}${suffix}`;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    function renderMetricsCharts(data) {
+      const traffic = data.hourlyTraffic24h || [];
+      const labels = traffic.map((item) => item.label);
+      const values = traffic.map((item) => item.value);
+      const source = data.sourceBreakdown || { asi101Percentage: 0, aiPercentage: 0 };
+
+      if (trafficLineChart) trafficLineChart.destroy();
+      if (sourcePieChart) sourcePieChart.destroy();
+
+      trafficLineChart = new Chart(document.getElementById('trafficLineChart'), {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Lượt dịch',
+            data: values,
+            borderColor: '#38bdf8',
+            backgroundColor: 'rgba(56, 189, 248, 0.2)',
+            fill: true,
+            tension: 0.3,
+            pointRadius: 2,
+          }],
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { labels: { color: '#cbd5e1' } } },
+          scales: {
+            x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.15)' } },
+            y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.15)' } },
+          },
+        },
+      });
+
+      sourcePieChart = new Chart(document.getElementById('sourcePieChart'), {
+        type: 'pie',
+        data: {
+          labels: ['ASI101', 'AI'],
+          datasets: [{
+            data: [source.asi101Percentage || 0, source.aiPercentage || 0],
+            backgroundColor: ['#22c55e', '#3b82f6'],
+          }],
+        },
+        options: {
+          plugins: {
+            legend: { labels: { color: '#e2e8f0' } },
+          },
+        },
+      });
+    }
+
+    function detectSystemFromTerm(term) {
+      const categoryKey = String(term?.category?.key || '').toLowerCase();
+      if (categoryKey) {
+        const labelMap = {
+          engine: 'Engine',
+          brake: 'Brake',
+          ev: 'EV',
+          chassis: 'Chassis',
+          auto: currentLang === 'en' ? 'Auto' : currentLang === 'ja' ? '自動' : 'Tự động',
+        };
+        if (labelMap[categoryKey]) {
+          return labelMap[categoryKey];
+        }
+      }
+
+      const base = `${term.english || ''} ${term.vietnamese || ''}`.toLowerCase();
+      if (base.includes('engine') || base.includes('động cơ')) return 'Engine';
+      if (base.includes('brake') || base.includes('phanh')) return 'Brake';
+      if (base.includes('ev') || base.includes('xe điện') || base.includes('battery')) return 'EV';
+      if (base.includes('chassis') || base.includes('khung gầm')) return 'Chassis';
+      return 'General';
+    }
+
+    function getConfidence(term) {
+      if (typeof term.confidence === 'number') return `${Math.round(term.confidence * 100)}%`;
+      const provider = String(term.source || '').toLowerCase();
+      if (provider.includes('openai') || provider.includes('gemini')) return '82%';
+      if (provider.includes('internal')) return '98%';
+      return '75%';
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-pane').forEach((tab) => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-nav').forEach((btn) => btn.classList.remove('active'));
+
+      document.getElementById(tabName + '-tab').classList.add('active');
+      document.querySelectorAll(`[data-tab="${tabName}"]`).forEach((btn) => btn.classList.add('active'));
+
+      if (tabName === 'metrics') refreshMetrics();
+      else if (tabName === 'pending') refreshPendingTerms();
+      else if (tabName === 'feedback') refreshFeedback();
+    }
+
+    async function refreshMetrics() {
+      if (!adminSessionToken) return;
+      try {
+        const response = await fetch('/api/admin/metrics', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + adminSessionToken,
+          },
+          body: JSON.stringify({}),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          alert('Admin key không hợp lệ: ' + data.message);
+          return;
+        }
+
+        animateCounter('metricsTranslationCount', data.translationCountToday);
+        animateCounter('metricsErrorRate', parseFloat(data.errorRatePercentage), '%');
+        animateCounter('metricsResponseTime', Number(data.avgResponseTimeMs), 'ms');
+        animateCounter('metricsRequestsLastHour', data.requestsLastHour);
+
+        renderMetricsCharts(data);
+
+        const alertsDiv = document.getElementById('metricsAlerts');
+        alertsDiv.innerHTML = '';
+        if (data.alerts && data.alerts.length > 0) {
+          data.alerts.forEach((alert) => {
+            const alertEl = document.createElement('div');
+            alertEl.className = 'alert-warning';
+            alertEl.innerHTML = `<p>${escapeHtml(alert)}</p>`;
+            alertsDiv.appendChild(alertEl);
+          });
+        }
+      } catch (error) {
+        alert('Lỗi tải metrics: ' + error.message);
+      }
+    }
+
+    async function refreshPendingTerms() {
+      if (!adminSessionToken) return;
+      try {
+        const response = await fetch('/api/admin/pending-terms', {
+          headers: { 'Authorization': 'Bearer ' + adminSessionToken },
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          alert('Lỗi tải pending terms: ' + data.message);
+          return;
+        }
+
+        currentPendingTerms = data.terms || [];
+        const list = document.getElementById('pendingTermsList');
+        list.innerHTML = '';
+
+        if (!currentPendingTerms.length) {
+          list.innerHTML = '<tr><td colspan="6" class="text-slate-400">' + t('noPending') + '</td></tr>';
+          return;
+        }
+
+        currentPendingTerms.forEach((term) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td><input type="checkbox" class="pending-select" value="${escapeHtml(term.id)}"></td>
+            <td class="text-slate-100">${escapeHtml(term.english)}</td>
+            <td class="text-slate-200">${escapeHtml(term.vietnamese || '')}</td>
+            <td class="text-slate-300">${escapeHtml(detectSystemFromTerm(term))}</td>
+            <td class="text-cyan-300 font-semibold">${escapeHtml(getConfidence(term))}</td>
+            <td>
+              <div class="flex gap-2">
+                <button onclick="approveTerm('${escapeHtml(term.id)}', 'approve')" class="bg-green-600 hover:bg-green-500">${currentLang === 'en' ? 'Approve' : currentLang === 'ja' ? '承認' : 'Duyệt'}</button>
+                <button onclick="editPendingTerm('${escapeHtml(term.id)}')" class="bg-yellow-600 hover:bg-yellow-500">${currentLang === 'en' ? 'Edit' : currentLang === 'ja' ? '編集' : 'Sửa'}</button>
+              </div>
+            </td>
+          `;
+          list.appendChild(row);
+        });
+      } catch (error) {
+        alert('Lỗi tải pending terms: ' + error.message);
+      }
+    }
+
+    async function bulkApproveSelected() {
+      const selected = Array.from(document.querySelectorAll('.pending-select:checked')).map((el) => el.value);
+      if (!selected.length) {
+        alert('Chưa chọn dòng nào để duyệt.');
+        return;
+      }
+
+      let successCount = 0;
+      for (const termId of selected) {
+        const ok = await approveTerm(termId, 'approve', true);
+        if (ok) successCount++;
+      }
+      document.getElementById('pendingBulkStatus').textContent = currentLang === 'en'
+        ? `Approved ${successCount}/${selected.length} terms.`
+        : currentLang === 'ja'
+          ? `${selected.length}件中 ${successCount}件を承認しました。`
+          : `Đã duyệt ${successCount}/${selected.length} thuật ngữ.`;
+      await refreshPendingTerms();
+      await refreshMetrics();
+    }
+
+    function editPendingTerm(termId) {
+      const term = currentPendingTerms.find((item) => item.id === termId);
+      if (!term) return;
+      switchTab('crud');
+      document.getElementById('crudEnglish').value = term.english || '';
+      document.getElementById('crudVietnamese').value = term.vietnamese || '';
+      document.getElementById('crudJapaneseKanji').value = term.japanese?.kanji || '';
+      document.getElementById('crudJapaneseRomaji').value = term.japanese?.romaji || '';
+      document.getElementById('crudChinese').value = term.chinese_simplified || '';
+      document.getElementById('crudCategory').value = JSON.stringify(term.category || { key: 'auto', vi: 'Tự động', en: 'Auto' });
+    }
+
+    async function approveTerm(termId, action, silent = false) {
+      if (!adminSessionToken) {
+        if (!silent) alert('Vui lòng login lại');
+        return false;
+      }
+      try {
+        const response = await fetch('/api/admin/approve-term', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + adminSessionToken,
+          },
+          body: JSON.stringify({ termId, action }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          if (!silent) alert('Lỗi: ' + data.message);
+          return false;
+        }
+        if (!silent) {
+          alert(data.message);
+          refreshPendingTerms();
+        }
+        return true;
+      } catch (error) {
+        if (!silent) alert('Lỗi: ' + error.message);
+        return false;
+      }
+    }
+
+    async function crudOperation(operation) {
+      if (!adminSessionToken) {
+        alert('Vui lòng login lại');
+        return;
+      }
+
+      const termKey = document.getElementById('crudTermKey').value;
+      const termData = {
+        english: document.getElementById('crudEnglish').value,
+        vietnamese: document.getElementById('crudVietnamese').value,
+        japanese: {
+          kanji: document.getElementById('crudJapaneseKanji').value || 'N/A',
+          romaji: document.getElementById('crudJapaneseRomaji').value || 'N/A',
+        },
+        chinese_simplified: document.getElementById('crudChinese').value,
+      };
+
+      try {
+        const categoryStr = document.getElementById('crudCategory').value;
+        if (categoryStr) termData.category = JSON.parse(categoryStr);
+      } catch (_e) {
+        alert('Category JSON không hợp lệ');
+        return;
+      }
+
+      if (!termData.english) {
+        alert('English text là bắt buộc');
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/admin/crud-term', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + adminSessionToken,
+          },
+          body: JSON.stringify({ operation, termKey, termData }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          alert('Lỗi: ' + data.message);
+          return;
+        }
+
+        document.getElementById('crudStatus').textContent = 'OK: ' + data.message;
+        document.getElementById('crudTermKey').value = '';
+        document.getElementById('crudEnglish').value = '';
+        document.getElementById('crudVietnamese').value = '';
+        document.getElementById('crudJapaneseKanji').value = '';
+        document.getElementById('crudJapaneseRomaji').value = '';
+        document.getElementById('crudChinese').value = '';
+        document.getElementById('crudCategory').value = '';
+
+        localStorage.setItem('autotranslate-dictionary-updated-at', String(Date.now()));
+
+        refreshDictionaryPreview();
+      } catch (error) {
+        alert('Lỗi: ' + error.message);
+      }
+    }
+
+    async function refreshDictionaryPreview() {
+      try {
+        const response = await fetch('dictionary.json');
+        const data = await response.json();
+        const terms = data.terms || {};
+        const preview = document.getElementById('dictionaryPreview');
+
+        let html = `<p class="text-green-400 mb-2">Total terms: ${Object.keys(terms).length}</p>`;
+        Object.entries(terms).slice(0, 20).forEach(([key, term]) => {
+          html += `<div class="mb-2 pb-2 border-b border-slate-700">
+              <strong class="text-blue-400">${escapeHtml(key)}</strong><br>
+              ${escapeHtml(term.english)} -> ${escapeHtml(term.vietnamese)}
+            </div>`;
+        });
+
+        preview.innerHTML = html;
+      } catch (_error) {}
+    }
+
+    function feedbackTypeLabel(type) {
+      if (type === 'error') return t('prioError');
+      if (type === 'display') return t('prioDisplay');
+      return t('prioSuggestion');
+    }
+
+    function feedbackTypeColor(type) {
+      if (type === 'error') return 'text-red-300';
+      if (type === 'display') return 'text-amber-300';
+      return 'text-sky-300';
+    }
+
+    function jumpToCrudFromFeedback(sourceText, translatedText) {
+      switchTab('crud');
+      document.getElementById('crudEnglish').value = sourceText || '';
+      document.getElementById('crudVietnamese').value = translatedText || '';
+      document.getElementById('crudStatus').textContent = currentLang === 'en'
+        ? 'Loaded from feedback. You can edit and click Create/Update.'
+        : currentLang === 'ja'
+          ? 'フィードバックからデータを読み込みました。編集して作成/更新を押してください。'
+          : 'Đã lấy dữ liệu từ Feedback. Bạn có thể sửa rồi bấm Tạo/Sửa.';
+    }
+
+    function setFeedbackSort(sortKey) {
+      if (feedbackState.sortKey === sortKey) {
+        feedbackState.sortDir = feedbackState.sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        feedbackState.sortKey = sortKey;
+        feedbackState.sortDir = 'asc';
+      }
+      feedbackState.page = 1;
+      renderFeedbackTable();
+    }
+
+    function changeFeedbackPage(delta) {
+      const totalPages = Math.max(1, Math.ceil(feedbackState.filtered.length / feedbackState.pageSize));
+      feedbackState.page = Math.min(totalPages, Math.max(1, feedbackState.page + delta));
+      renderFeedbackTable();
+    }
+
+    function applyFeedbackFilters() {
+      const filterType = document.getElementById('feedbackPriorityFilter').value;
+      const query = (feedbackSearchInput?.value || '').trim().toLowerCase();
+      feedbackState.filtered = (feedbackState.all || []).filter((fb) => {
+        const matchType = filterType === 'all' || fb.feedbackType === filterType;
+        if (!matchType) return false;
+        if (!query) return true;
+        const hay = `${fb.sourceText || ''} ${fb.translatedText || ''} ${fb.message || ''}`.toLowerCase();
+        return hay.includes(query);
+      });
+
+      const dir = feedbackState.sortDir === 'asc' ? 1 : -1;
+      feedbackState.filtered.sort((a, b) => {
+        const va = String(a[feedbackState.sortKey] ?? '');
+        const vb = String(b[feedbackState.sortKey] ?? '');
+        return va.localeCompare(vb, 'vi') * dir;
+      });
+    }
+
+    function renderFeedbackTable() {
+      const list = document.getElementById('feedbackList');
+      applyFeedbackFilters();
+      const total = feedbackState.filtered.length;
+      const totalPages = Math.max(1, Math.ceil(total / feedbackState.pageSize));
+      feedbackState.page = Math.min(totalPages, feedbackState.page);
+      const start = (feedbackState.page - 1) * feedbackState.pageSize;
+      const pageItems = feedbackState.filtered.slice(start, start + feedbackState.pageSize);
+
+      if (!pageItems.length) {
+        list.innerHTML = '<tr><td colspan="6" class="text-slate-400">' + t('noFeedbackMatch') + '</td></tr>';
+      } else {
+        list.innerHTML = '';
+        pageItems.forEach((fb) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td class="text-slate-400">${escapeHtml(new Date(fb.timestamp).toLocaleString())}</td>
+            <td class="${feedbackTypeColor(fb.feedbackType)} font-semibold">${escapeHtml(feedbackTypeLabel(fb.feedbackType))}</td>
+            <td class="text-slate-100">${escapeHtml(fb.sourceText || '')}</td>
+            <td class="text-slate-200">${escapeHtml(fb.translatedText || '')}</td>
+            <td class="text-slate-300">${escapeHtml(fb.message || 'N/A')}</td>
+            <td><button class="bg-yellow-600 hover:bg-yellow-500" onclick="jumpToCrudFromFeedback('${escapeHtml(fb.sourceText || '')}', '${escapeHtml(fb.translatedText || '')}')">${currentLang === 'en' ? 'Open CRUD' : currentLang === 'ja' ? 'CRUDを開く' : 'Mở CRUD'}</button></td>
+          `;
+          list.appendChild(row);
+        });
+      }
+
+      if (feedbackPaginationInfo) {
+        feedbackPaginationInfo.textContent = `${start + (total ? 1 : 0)}-${Math.min(start + feedbackState.pageSize, total)} / ${total}`;
+      }
+    }
+
+    async function refreshFeedback() {
+      if (!adminSessionToken) return;
+      try {
+        const response = await fetch('feedback-log.json');
+        if (!response.ok) {
+          document.getElementById('feedbackList').innerHTML = '<tr><td colspan="6" class="text-slate-400">' + t('noFeedback') + '</td></tr>';
+          return;
+        }
+
+        const latest = await response.json();
+        const previousCount = feedbackState.all.length;
+        feedbackState.all = latest;
+        if (previousCount && latest.length > previousCount) {
+          showAdminToast(currentLang === 'en' ? 'New feedback received.' : currentLang === 'ja' ? '新しいフィードバックを受信しました。' : 'Có feedback mới vừa được gửi.');
+        }
+        feedbackState.page = 1;
+        renderFeedbackTable();
+      } catch (error) {
+        document.getElementById('feedbackList').innerHTML = '<tr><td colspan="6" class="text-red-400">Lỗi tải feedback: ' + escapeHtml(error.message) + '</td></tr>';
+      }
+    }
+
+    async function pollFeedbackNotifications() {
+      if (!adminSessionToken) return;
+      try {
+        const response = await fetch('feedback-log.json', { cache: 'no-store' });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (feedbackState.all.length && data.length > feedbackState.all.length) {
+          showAdminToast(currentLang === 'en' ? 'New feedback arrived.' : currentLang === 'ja' ? '新しいフィードバックがあります。' : 'Có feedback mới.');
+        }
+      } catch (_error) {}
+    }
+
+    async function exportDictionary() {
+      if (!adminSessionToken) {
+        alert('Vui lòng login lại');
+        return;
+      }
+      try {
+        const mode = document.querySelector('input[name="exportMode"]:checked')?.value || 'all';
+        const selectedSystem = (exportSystemSelect?.value || 'engine').toLowerCase();
+        document.getElementById('exportStatus').textContent = t('exportPreparing');
+        if (exportProgressShell && exportProgressFill) {
+          exportProgressShell.classList.remove('hidden');
+          exportProgressFill.style.width = '0%';
+        }
+
+        let progress = 0;
+        const progressTimer = setInterval(() => {
+          progress = Math.min(92, progress + Math.floor(Math.random() * 9) + 5);
+          if (exportProgressFill) exportProgressFill.style.width = `${progress}%`;
+        }, 120);
+
+        const response = await fetch('dictionary.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Không thể tải dictionary.json');
+        const data = await response.json();
+        const terms = data.terms || {};
+
+        const filteredEntries = Object.entries(terms).filter(([, term]) => {
+          if (mode === 'ai') {
+            const source = String(term.source || '').toLowerCase();
+            return source.includes('ai') || source.includes('openai') || source.includes('gemini') || source.includes('approved-from-ai') || source.includes('auto');
+          }
+          if (mode === 'system') {
+            return detectSystemFromTerm(term).toLowerCase() === selectedSystem;
+          }
+          return true;
+        });
+
+        const headers = ['term_key', 'english', 'vietnamese', 'japanese_kanji', 'japanese_romaji', 'chinese_simplified', 'system', 'source'];
+        const rows = filteredEntries.map(([key, term]) => {
+          const values = [
+            key,
+            term.english || '',
+            term.vietnamese || '',
+            term.japanese?.kanji || '',
+            term.japanese?.romaji || '',
+            term.chinese_simplified || '',
+            detectSystemFromTerm(term),
+            term.source || '',
+          ];
+          return values.map((v) => `"${String(v).replaceAll('"', '""')}"`).join(',');
+        });
+
+        const csv = [headers.join(','), ...rows].join('\n');
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `dictionary-${new Date().toISOString().split('T')[0]}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+
+        clearInterval(progressTimer);
+        if (exportProgressFill) exportProgressFill.style.width = '100%';
+        document.getElementById('exportStatus').textContent = `${t('exportDone')} (${rows.length} rows)`;
+        setTimeout(() => {
+          if (exportProgressShell && exportProgressFill) {
+            exportProgressShell.classList.add('hidden');
+            exportProgressFill.style.width = '0%';
+          }
+        }, 450);
+      } catch (error) {
+        if (exportProgressShell && exportProgressFill) {
+          exportProgressShell.classList.add('hidden');
+          exportProgressFill.style.width = '0%';
+        }
+        alert('Lỗi: ' + error.message);
+      }
+    }
+
+    const checkAuthStatus = () => {
+      if (adminSessionToken) {
+        document.getElementById('authLockScreen').style.display = 'none';
+        document.getElementById('mainDashboard').classList.remove('hidden');
+        refreshMetrics();
+        refreshDictionaryPreview();
+      } else {
+        document.getElementById('authLockScreen').style.display = 'flex';
+        document.getElementById('mainDashboard').classList.add('hidden');
+      }
+    };
+
+    const performLogin = async (key) => {
+      try {
+        const response = await fetch('/api/admin/verify-key', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key }),
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+          document.getElementById('authError').classList.remove('hidden');
+          document.getElementById('authError').textContent = data.message;
+          document.getElementById('authKeyInput').value = '';
+          document.getElementById('authKeyInput').focus();
+          return false;
+        }
+
+        adminSessionToken = data.sessionToken;
+        sessionStorage.setItem('admin-session-token', adminSessionToken);
+        document.getElementById('authError').classList.add('hidden');
+
+        document.getElementById('authLockScreen').style.transition = 'opacity 0.3s ease';
+        document.getElementById('authLockScreen').style.opacity = '0';
+        setTimeout(() => checkAuthStatus(), 300);
+        return true;
+      } catch (error) {
+        document.getElementById('authError').classList.remove('hidden');
+        document.getElementById('authError').textContent = 'Lỗi kết nối: ' + error.message;
+        return false;
+      }
+    };
+
+    const performLogout = () => {
+      adminSessionToken = null;
+      sessionStorage.removeItem('admin-session-token');
+      document.getElementById('mainDashboard').style.transition = 'opacity 0.5s ease';
+      document.getElementById('mainDashboard').style.opacity = '0';
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 500);
+    };
+
+    document.getElementById('authForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const key = document.getElementById('authKeyInput').value;
+      if (key) await performLogin(key);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSyncedTheme();
+
+      initI18n().then(() => {
+        applyI18n();
+      });
+
+      if (languageSelect) {
+        languageSelect.value = currentLang;
+        languageSelect.addEventListener('change', (event) => setLanguage(event.target.value));
+      }
+
+      document.querySelectorAll('input[name="exportMode"]').forEach((radio) => {
+        radio.addEventListener('change', () => {
+          const isSystem = document.querySelector('input[name="exportMode"]:checked')?.value === 'system';
+          if (exportSystemSelect) exportSystemSelect.disabled = !isSystem;
+        });
+      });
+      if (exportSystemSelect) {
+        const isSystem = document.querySelector('input[name="exportMode"]:checked')?.value === 'system';
+        exportSystemSelect.disabled = !isSystem;
+      }
+
+      if (userMenuButton) {
+        userMenuButton.addEventListener('click', (event) => {
+          event.stopPropagation();
+          toggleUserMenu();
+        });
+      }
+      if (setAdminKeyButton) {
+        setAdminKeyButton.addEventListener('click', async () => {
+          toggleUserMenu(false);
+          await updateAdminKeyFromMenu();
+        });
+      }
+      if (logoutMenuButton) {
+        logoutMenuButton.addEventListener('click', () => {
+          toggleUserMenu(false);
+          performLogout();
+        });
+      }
+      document.addEventListener('click', (event) => {
+        if (!userMenuWrap?.contains(event.target)) toggleUserMenu(false);
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') toggleUserMenu(false);
+      });
+
+      if (themeSyncToggle) {
+        themeSyncToggle.addEventListener('click', () => {
+          const current = localStorage.getItem('autotranslate-theme') === 'dark' ? 'dark' : 'light';
+          const next = current === 'dark' ? 'light' : 'dark';
+          localStorage.setItem('autotranslate-theme', next);
+          applySyncedTheme(next);
+        });
+      }
+
+      if (backToTranslatorButton) {
+        backToTranslatorButton.addEventListener('click', () => {
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: 'ADMIN_BACK_TO_TRANSLATOR' }, '*');
+          } else {
+            window.location.href = '/web.html';
+          }
+        });
+      }
+
+      if (feedbackSearchInput) {
+        feedbackSearchInput.addEventListener('input', () => {
+          feedbackState.page = 1;
+          renderFeedbackTable();
+        });
+      }
+
+      const selectAll = document.getElementById('pendingSelectAll');
+      if (selectAll) {
+        selectAll.addEventListener('change', (event) => {
+          document.querySelectorAll('.pending-select').forEach((el) => {
+            el.checked = event.target.checked;
+          });
+        });
+      }
+      switchTab('metrics');
+      checkAuthStatus();
+
+      window.addEventListener('storage', (event) => {
+        if (event.key === 'autotranslate-theme') {
+          applySyncedTheme(event.newValue || 'light');
+        }
+        if (event.key === 'autotranslate-feedback-event' && event.newValue) {
+          showAdminToast(currentLang === 'en' ? 'Feedback notification received.' : currentLang === 'ja' ? 'フィードバック通知を受信しました。' : 'Đã nhận thông báo feedback mới.');
+          refreshFeedback();
+        }
+        if (event.key === 'autotranslate-contribution-event' && event.newValue) {
+          showAdminToast(currentLang === 'en' ? 'New term contribution received.' : currentLang === 'ja' ? '新しい用語投稿を受信しました。' : 'Đã nhận đóng góp thuật ngữ mới.');
+          refreshPendingTerms();
+        }
+      });
+    });
+
+    setInterval(() => {
+      if (adminSessionToken && !document.getElementById('mainDashboard').classList.contains('hidden')) {
+        refreshMetrics();
+      }
+    }, 30000);
+
+    setInterval(() => {
+      if (adminSessionToken && !document.getElementById('mainDashboard').classList.contains('hidden')) {
+        pollFeedbackNotifications();
+      }
+    }, 15000);
+  </script>
+  </div>
+  <!-- End mainDashboard -->
+</body>
+</html>
