@@ -1,0 +1,318 @@
+{
+  "version": "2.0.0",
+  "description": "Automotive technical terms multilingual dictionary (categorized sample)",
+  "categories": [
+    {
+      "key": "engine",
+      "vi": "Hệ thống động cơ",
+      "en": "Engine System"
+    },
+    {
+      "key": "transmission",
+      "vi": "Hệ thống truyền động",
+      "en": "Transmission"
+    },
+    {
+      "key": "electrical",
+      "vi": "Hệ thống điện & Điện tử",
+      "en": "Electrical & Electronics"
+    },
+    {
+      "key": "chassis_body",
+      "vi": "Khung gầm & Vỏ xe",
+      "en": "Chassis & Body"
+    },
+    {
+      "key": "brake",
+      "vi": "Hệ thống phanh",
+      "en": "Brake System"
+    },
+    {
+      "key": "ev",
+      "vi": "Xe điện (EV)",
+      "en": "Electric Vehicle (EV)"
+    }
+  ],
+  "terms": {
+    "engine": {
+      "category": {
+        "key": "engine",
+        "vi": "Hệ thống động cơ",
+        "en": "Engine System"
+      },
+      "english": "Engine",
+      "vietnamese": "Động cơ",
+      "japanese": {
+        "kanji": "内燃機関",
+        "romaji": "Nainen Kikan"
+      },
+      "chinese_simplified": "发动机"
+    },
+    "piston": {
+      "category": {
+        "key": "engine",
+        "vi": "Hệ thống động cơ",
+        "en": "Engine System"
+      },
+      "english": "Piston",
+      "vietnamese": "Piston",
+      "japanese": {
+        "kanji": "ピストン",
+        "romaji": "Pisuton"
+      },
+      "chinese_simplified": "活塞"
+    },
+    "crankshaft": {
+      "category": {
+        "key": "engine",
+        "vi": "Hệ thống động cơ",
+        "en": "Engine System"
+      },
+      "english": "Crankshaft",
+      "vietnamese": "Trục khuỷu",
+      "japanese": {
+        "kanji": "クランクシャフト",
+        "romaji": "Kuranku Shafuto"
+      },
+      "chinese_simplified": "曲轴"
+    },
+    "fuel_injector": {
+      "category": {
+        "key": "engine",
+        "vi": "Hệ thống động cơ",
+        "en": "Engine System"
+      },
+      "english": "Fuel Injector",
+      "vietnamese": "Kim phun nhiên liệu",
+      "japanese": {
+        "kanji": "燃料噴射装置",
+        "romaji": "Nenryo Funsha Sochi"
+      },
+      "chinese_simplified": "燃油喷射器"
+    },
+    "transmission": {
+      "category": {
+        "key": "transmission",
+        "vi": "Hệ thống truyền động",
+        "en": "Transmission"
+      },
+      "english": "Transmission",
+      "vietnamese": "Hộp số",
+      "japanese": {
+        "kanji": "変速機",
+        "romaji": "Hensokuki"
+      },
+      "chinese_simplified": "变速器"
+    },
+    "clutch": {
+      "category": {
+        "key": "transmission",
+        "vi": "Hệ thống truyền động",
+        "en": "Transmission"
+      },
+      "english": "Clutch",
+      "vietnamese": "Ly hợp",
+      "japanese": {
+        "kanji": "クラッチ",
+        "romaji": "Kuracchi"
+      },
+      "chinese_simplified": "离合器"
+    },
+    "driveshaft": {
+      "category": {
+        "key": "transmission",
+        "vi": "Hệ thống truyền động",
+        "en": "Transmission"
+      },
+      "english": "Driveshaft",
+      "vietnamese": "Trục truyền động",
+      "japanese": {
+        "kanji": "プロペラシャフト",
+        "romaji": "Puropera Shafuto"
+      },
+      "chinese_simplified": "传动轴"
+    },
+    "differential": {
+      "category": {
+        "key": "transmission",
+        "vi": "Hệ thống truyền động",
+        "en": "Transmission"
+      },
+      "english": "Differential",
+      "vietnamese": "Vi sai",
+      "japanese": {
+        "kanji": "差動装置",
+        "romaji": "Sado Sochi"
+      },
+      "chinese_simplified": "差速器"
+    },
+    "battery": {
+      "category": {
+        "key": "electrical",
+        "vi": "Hệ thống điện & Điện tử",
+        "en": "Electrical & Electronics"
+      },
+      "english": "Battery",
+      "vietnamese": "Ắc quy",
+      "japanese": {
+        "kanji": "バッテリー",
+        "romaji": "Batteri"
+      },
+      "chinese_simplified": "电池"
+    },
+    "alternator": {
+      "category": {
+        "key": "electrical",
+        "vi": "Hệ thống điện & Điện tử",
+        "en": "Electrical & Electronics"
+      },
+      "english": "Alternator",
+      "vietnamese": "Máy phát điện",
+      "japanese": {
+        "kanji": "オルタネーター",
+        "romaji": "Orutaneta"
+      },
+      "chinese_simplified": "交流发电机"
+    },
+    "wiring_harness": {
+      "category": {
+        "key": "electrical",
+        "vi": "Hệ thống điện & Điện tử",
+        "en": "Electrical & Electronics"
+      },
+      "english": "Wiring Harness",
+      "vietnamese": "Bó dây điện",
+      "japanese": {
+        "kanji": "ワイヤーハーネス",
+        "romaji": "Waiya Hanesu"
+      },
+      "chinese_simplified": "线束"
+    },
+    "ecu": {
+      "category": {
+        "key": "electrical",
+        "vi": "Hệ thống điện & Điện tử",
+        "en": "Electrical & Electronics"
+      },
+      "english": "Engine Control Unit (ECU)",
+      "vietnamese": "Bộ điều khiển động cơ (ECU)",
+      "japanese": {
+        "kanji": "エンジン制御ユニット",
+        "romaji": "Enjin Seigyo Yunitto"
+      },
+      "chinese_simplified": "发动机控制单元"
+    },
+    "chassis": {
+      "category": {
+        "key": "chassis_body",
+        "vi": "Khung gầm & Vỏ xe",
+        "en": "Chassis & Body"
+      },
+      "english": "Chassis",
+      "vietnamese": "Khung gầm",
+      "japanese": {
+        "kanji": "シャーシ",
+        "romaji": "Shashi"
+      },
+      "chinese_simplified": "底盘"
+    },
+    "suspension": {
+      "category": {
+        "key": "chassis_body",
+        "vi": "Khung gầm & Vỏ xe",
+        "en": "Chassis & Body"
+      },
+      "english": "Suspension",
+      "vietnamese": "Hệ thống treo",
+      "japanese": {
+        "kanji": "サスペンション",
+        "romaji": "Sasupenshon"
+      },
+      "chinese_simplified": "悬架系统"
+    },
+    "shock_absorber": {
+      "category": {
+        "key": "chassis_body",
+        "vi": "Khung gầm & Vỏ xe",
+        "en": "Chassis & Body"
+      },
+      "english": "Shock Absorber",
+      "vietnamese": "Giảm xóc",
+      "japanese": {
+        "kanji": "ショックアブソーバー",
+        "romaji": "Shokku Abusoba"
+      },
+      "chinese_simplified": "减震器"
+    },
+    "bumper": {
+      "category": {
+        "key": "chassis_body",
+        "vi": "Khung gầm & Vỏ xe",
+        "en": "Chassis & Body"
+      },
+      "english": "Bumper",
+      "vietnamese": "Cản xe",
+      "japanese": {
+        "kanji": "バンパー",
+        "romaji": "Banpa"
+      },
+      "chinese_simplified": "保险杠"
+    },
+    "brake_pad": {
+      "category": {
+        "key": "brake",
+        "vi": "Hệ thống phanh",
+        "en": "Brake System"
+      },
+      "english": "Brake Pad",
+      "vietnamese": "Má phanh",
+      "japanese": {
+        "kanji": "ブレーキパッド",
+        "romaji": "Bureki Paddo"
+      },
+      "chinese_simplified": "刹车片"
+    },
+    "abs": {
+      "category": {
+        "key": "brake",
+        "vi": "Hệ thống phanh",
+        "en": "Brake System"
+      },
+      "english": "Anti-lock Braking System (ABS)",
+      "vietnamese": "Hệ thống chống bó cứng phanh (ABS)",
+      "japanese": {
+        "kanji": "アンチロックブレーキシステム",
+        "romaji": "Anchirokku Bureki Shisutemu"
+      },
+      "chinese_simplified": "防抱死制动系统"
+    },
+    "traction_motor": {
+      "category": {
+        "key": "ev",
+        "vi": "Xe điện (EV)",
+        "en": "Electric Vehicle (EV)"
+      },
+      "english": "Traction Motor",
+      "vietnamese": "Động cơ kéo điện",
+      "japanese": {
+        "kanji": "駆動モーター",
+        "romaji": "Kudo Mota"
+      },
+      "chinese_simplified": "驱动电机"
+    },
+    "battery_management_system": {
+      "category": {
+        "key": "ev",
+        "vi": "Xe điện (EV)",
+        "en": "Electric Vehicle (EV)"
+      },
+      "english": "Battery Management System (BMS)",
+      "vietnamese": "Hệ thống quản lý pin (BMS)",
+      "japanese": {
+        "kanji": "バッテリーマネジメントシステム",
+        "romaji": "Batteri Manejimento Shisutemu"
+      },
+      "chinese_simplified": "电池管理系统"
+    }
+  }
+}

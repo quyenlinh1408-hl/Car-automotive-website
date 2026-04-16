@@ -1,0 +1,28 @@
+{
+  "tranformasion||en||ai||nodefs||": {
+    "english": "tranformasion",
+    "vietnamese": "chuyển dạng",
+    "japanese": {
+      "kanji": "トランスフォーメーション",
+      "romaji": "N/A"
+    },
+    "chinese_simplified": "tranformasion",
+    "provider": "mymemory",
+    "fromCache": false,
+    "detected_source_language": "en",
+    "definitions": {}
+  },
+  "vehicle||en||ai||nodefs||": {
+    "english": "vehicle",
+    "vietnamese": "Phương tiện&#09;giao thông",
+    "japanese": {
+      "kanji": "車両",
+      "romaji": "N/A"
+    },
+    "chinese_simplified": "车辆",
+    "provider": "mymemory",
+    "fromCache": false,
+    "detected_source_language": "en",
+    "definitions": {}
+  }
+}
