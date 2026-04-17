@@ -1742,7 +1742,7 @@
           : (countsByCategory.get(category.key) || 0);
 
         const activeClass = isActive
-          ? 'border-slate-800 bg-slate-900 text-white shadow-sm'
+          ? 'border-sky-300 bg-sky-50 text-slate-800 shadow-sm ring-1 ring-sky-100'
           : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50';
 
         return `
@@ -1752,7 +1752,7 @@
             class="w-full rounded-xl border px-3 py-2.5 text-left text-sm font-semibold transition ${activeClass}"
           >
             <span class="block">${escapeHtml(category.vi)}</span>
-            <span class="mt-0.5 block text-xs font-medium ${isActive ? 'text-slate-200' : 'text-slate-500'}">${escapeHtml(category.en)} • ${count} từ</span>
+            <span class="mt-0.5 block text-xs font-medium ${isActive ? 'text-slate-600' : 'text-slate-500'}">${escapeHtml(category.en)} • ${count} từ</span>
           </button>
         `;
       })

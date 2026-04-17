@@ -6,7 +6,7 @@
 	<title>Dịch Thuật Chuyên Ngành Ô Tô</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
 	<script>
 		window.tailwind = window.tailwind || {};
 		window.tailwind.config = {
@@ -16,17 +16,18 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 	<style>
 		:root {
-			--font-display: 'Sora', sans-serif;
-			--font-body: 'Source Sans 3', sans-serif;
+			--font-display: 'Montserrat', sans-serif;
+			--font-body: 'Be Vietnam Pro', sans-serif;
+			--text-color: #2D3436;
 			--color-bg-light: #f8fafc;
 			--color-panel-light: #ffffff;
-			--color-text-light: #1e293b;
-			--color-text-muted-light: #475569;
+			--color-text-light: var(--text-color);
+			--color-text-muted-light: var(--text-color);
 			--color-border-light: #cbd5e1;
 			--color-bg-dark: #0f172a;
 			--color-panel-dark: #1a1a2e;
-			--color-text-dark: #e2e8f0;
-			--color-text-muted-dark: #cbd5e1;
+			--color-text-dark: var(--text-color);
+			--color-text-muted-dark: var(--text-color);
 			--color-border-dark: #334155;
 			--fpt-orange: #f59e0b;
 			--fpt-blue: #0056b3;
@@ -38,10 +39,25 @@
 			font-family: var(--font-body);
 			background-color: var(--color-bg-light);
 			color: var(--color-text-light);
+			font-size: 15.5px;
+			line-height: 1.7;
+			letter-spacing: 0.01em;
+			text-rendering: optimizeLegibility;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
 			background-image:
 				radial-gradient(circle at 15% -10%, rgba(59, 130, 246, 0.08) 0%, rgba(59, 130, 246, 0) 42%),
 				radial-gradient(circle at 85% -5%, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0) 38%),
 				linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+		}
+
+		h1,
+		h2,
+		h3,
+		.logo,
+		.brand-display {
+			font-family: var(--font-display);
+			letter-spacing: 0.01em;
 		}
 
 		body,
@@ -66,6 +82,7 @@
 		}
 
 		body.dark {
+			--text-color: #F5F6FA;
 			background-color: var(--color-bg-dark);
 			color: var(--color-text-dark);
 			background-image:
@@ -815,6 +832,89 @@
 			background: #7f1d1d;
 			color: #fca5a5;
 		}
+
+		.developer-profile {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			gap: 10px;
+		}
+
+		.developer-avatar {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			object-fit: cover;
+			border: 1px solid #cbd5e1;
+			flex-shrink: 0;
+		}
+
+		/* Smart text color system: global text follows --text-color */
+		body,
+		body p,
+		body span,
+		body small,
+		body li,
+		body label,
+		body th,
+		body td,
+		body h1,
+		body h2,
+		body h3,
+		body .logo,
+		body .brand-display,
+		body .section-title,
+		body .text-slate-900,
+		body .text-slate-800,
+		body .text-slate-700,
+		body .text-slate-600,
+		body .text-slate-500,
+		body .text-slate-400,
+		body .text-slate-300 {
+			color: var(--text-color) !important;
+		}
+
+		button,
+		[role='button'],
+		a.inline-flex,
+		.lang-option,
+		.dropdown-item,
+		#themeToggleText,
+		#translateButtonText,
+		#aiTranslateButtonText,
+		#resultExpandButtonText {
+			color: var(--text-color) !important;
+		}
+
+		/* Dark/saturated action backgrounds keep white text for readability */
+		#translateButton,
+		#translateButton *,
+		.lang-option.is-active,
+		.lang-option.is-active *,
+		button[class*='bg-orange-5'],
+		button[class*='bg-orange-6'],
+		button[class*='bg-amber-5'],
+		button[class*='bg-amber-6'],
+		button[class*='bg-yellow-5'],
+		button[class*='bg-yellow-6'],
+		button[class*='bg-blue'],
+		button[class*='bg-indigo'],
+		a[class*='bg-orange-5'],
+		a[class*='bg-orange-6'],
+		a[class*='bg-amber-5'],
+		a[class*='bg-amber-6'],
+		a[class*='bg-yellow-5'],
+		a[class*='bg-yellow-6'],
+		a[class*='bg-blue'],
+		a[class*='bg-indigo'] {
+			color: #FFFFFF !important;
+		}
+
+		/* Keep error-report actions in charcoal text for consistency */
+		#quickFeedbackButton,
+		button[onclick*='openFeedbackModal'] {
+			color: var(--text-color) !important;
+		}
 	</style>
 </head>
 <body class="min-h-screen bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-slate-100">
@@ -1309,7 +1409,10 @@
 				</div>
 				<div class="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800">
 					<p class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">Developed by</p>
-					<p class="mt-1 text-base font-semibold text-slate-900 dark:text-slate-100">Lê Trọng Quyền Linh</p>
+					<div class="developer-profile mt-2">
+						<img src="avatar.jpg" alt="Lê Trọng Quyền Linh" class="developer-avatar" />
+						<span class="text-base font-semibold text-slate-900 dark:text-slate-100">Lê Trọng Quyền Linh</span>
+					</div>
 				</div>
 				<div class="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800">
 					<p class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">Organization</p>

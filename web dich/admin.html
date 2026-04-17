@@ -6,14 +6,15 @@
   <title>Dashboard Admin - AutoTranslate Pro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://unpkg.com/i18next@23.16.4/dist/umd/i18next.min.js"></script>
   <style>
     :root {
-      --font-display: 'Sora', sans-serif;
-      --font-body: 'Source Sans 3', sans-serif;
+      --font-display: 'Montserrat', sans-serif;
+      --font-body: 'Be Vietnam Pro', sans-serif;
+      --text-color: #2D3436;
       --color-bg-dark: #0f172a;
       --color-panel-dark: #1a1a2e;
       --color-text-dark: #e2e8f0;
@@ -27,14 +28,14 @@
     }
     body.theme-light {
       background-color: #eaf1fb;
-      color: #0f172a;
+      color: var(--text-color);
     }
     body.theme-light .top-nav {
       background: rgba(255, 255, 255, 0.95);
       border-bottom: 1px solid #cbd5e1;
     }
-    body.theme-light .top-tab-btn { color: #334155; }
-    body.theme-light .top-tab-btn:hover { background: #dbeafe; color: #1e3a8a; border-color: #93c5fd; }
+    body.theme-light .top-tab-btn { color: var(--text-color); }
+    body.theme-light .top-tab-btn:hover { background: #dbeafe; color: var(--text-color); border-color: #93c5fd; }
     body.theme-light .top-tab-btn.active { background: #2563eb; color: #ffffff; border-color: #1d4ed8; }
     body.theme-light .metric-card,
     body.theme-light .bg-slate-900,
@@ -42,15 +43,24 @@
     body.theme-light .rounded-xl.border,
     body.theme-light .rounded-2xl.border {
       background: #ffffff !important;
-      color: #0f172a;
+      color: var(--text-color);
       border-color: #cbd5e1 !important;
     }
     body.theme-light .text-slate-100,
     body.theme-light .text-slate-200,
     body.theme-light .text-slate-300,
     body.theme-light .text-slate-400,
-    body.theme-light .text-slate-500 { color: #334155 !important; }
-    body.theme-light .pill { background: #ffffff; color: #0f172a; border-color: #cbd5e1; }
+    body.theme-light .text-slate-500 { color: var(--text-color) !important; }
+    body.theme-light p,
+    body.theme-light span,
+    body.theme-light h1,
+    body.theme-light h2,
+    body.theme-light h3,
+    body.theme-light label,
+    body.theme-light td {
+      color: var(--text-color) !important;
+    }
+    body.theme-light .pill { background: #ffffff; color: var(--text-color); border-color: #cbd5e1; }
     .top-nav { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); background: rgba(9, 18, 37, 0.92); border-bottom: 1px solid #1e293b; }
     .panel-width-wide { width: 95%; margin: 0 auto; }
     .toolbar-width-wide { width: 95%; margin: 0 auto 1rem; }
@@ -63,16 +73,17 @@
     .metric-card { background: linear-gradient(135deg, #1a3a52 0%, #0f172a 100%); border: 1px solid var(--color-border-dark); border-radius: 0.5rem; padding: 1rem; }
     .metric-value { font-size: 1.875rem; font-weight: bold; color: #3b82f6; }
     .metric-label { font-size: 0.875rem; color: #94a3b8; margin-top: 0.5rem; }
+    body.theme-light .metric-label { color: var(--text-color); }
     .alert-warning { background-color: #7c2d12; border-left: 4px solid #ea8600; padding: 1rem; border-radius: 0.375rem; margin-bottom: 1rem; }
     .alert-warning p { color: #fcd34d; margin: 0; }
     table { width: 100%; border-collapse: collapse; }
-    table th { background-color: #0b1220; text-align: left; padding: 0.75rem; border-bottom: 1px solid #1e293b; }
+    table th { background-color: #0b1220; color: #FFFFFF; font-weight: 600; text-align: left; padding: 0.75rem; border-bottom: 1px solid #1e293b; }
     table td { padding: 0.75rem; border-bottom: 1px solid #1e293b; }
     table tr:nth-child(even) { background-color: #111827; }
     .pro-table th { position: sticky; top: 0; z-index: 10; }
     .pro-table td, .pro-table th { white-space: nowrap; }
     input, textarea, select { background-color: #0b1220; color: #f8fafc; border: 1px solid #475569; border-radius: 0.375rem; padding: 0.5rem; margin-bottom: 1rem; width: 100%; }
-    button { background-color: var(--fpt-blue); color: white; padding: 0.5rem 1rem; border: none; border-radius: 0.375rem; cursor: pointer; font-weight: 600; margin-top: 0.5rem; }
+    button { background-color: var(--fpt-blue); color: #FFFFFF; padding: 0.65rem 1.1rem; border: none; border-radius: 0.375rem; cursor: pointer; font-weight: 600; margin-top: 0.5rem; }
     button:hover { background-color: #0041a0; }
     button.secondary { background-color: #475569; }
     button.secondary:hover { background-color: #64748b; }
@@ -143,6 +154,15 @@
     .user-menu-item:hover { background: #1e293b; }
     .user-menu-item.logout { color: #fca5a5; }
     .user-menu-item.logout:hover { background: rgba(220, 38, 38, 0.18); color: #fecaca; }
+    .button-group { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .dark-button,
+    button[class*='bg-blue'],
+    button[class*='bg-sky'],
+    button[class*='bg-green'],
+    button[class*='bg-yellow'],
+    button[class*='bg-orange'] {
+      color: #FFFFFF !important;
+    }
     .progress-shell {
       width: 95%;
       margin-top: 1rem;
@@ -167,9 +187,146 @@
     }
     body.theme-light table tr:nth-child(even) { background-color: #f8fafc; }
     body.theme-light table tr:hover { background-color: #e0ecff; }
-    body.theme-light .user-menu-item { color: #0f172a; }
+    body.theme-light .user-menu-item { color: var(--text-color); }
     body.theme-light .user-menu-item:hover { background: #eff6ff; }
+    /* Override all Tailwind text color classes for light mode */
+    body.theme-light .text-blue-300,
+    body.theme-light .text-blue-400,
+    body.theme-light .text-slate-100,
+    body.theme-light .text-slate-200,
+    body.theme-light .text-slate-300,
+    body.theme-light .text-slate-400,
+    body.theme-light .text-slate-500,
+    body.theme-light .text-green-300,
+    body.theme-light .text-red-300,
+    body.theme-light .text-yellow-300,
+    body.theme-light .text-cyan-300,
+    body.theme-light .text-orange-300 {
+      color: var(--text-color) !important;
+    }
     body.theme-light .progress-shell { background: #e2e8f0; border-color: #cbd5e1; }
+    body.theme-light input,
+    body.theme-light textarea,
+    body.theme-light select {
+      background-color: #ffffff;
+      color: var(--text-color);
+      border-color: #cbd5e1;
+    }
+    body.theme-light .pill,
+    body.theme-light #exportSystemSelect {
+      background-color: #f8fafc;
+      color: var(--text-color);
+      border-color: #cbd5e1;
+    }
+    body.theme-light input::placeholder,
+    body.theme-light textarea::placeholder {
+      color: #9ca3af;
+    }
+    body.theme-light h1,
+    body.theme-light h2,
+    body.theme-light h3,
+    body.theme-light h4,
+    body.theme-light h5,
+    body.theme-light h6 {
+      color: var(--text-color);
+    }
+    body.theme-light .user-dropdown {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      box-shadow: 0 16px 36px -20px rgba(15, 23, 42, 0.28);
+    }
+    body.theme-light .user-dropdown .px-4.py-3 {
+      border-bottom-color: #cbd5e1;
+    }
+    body.theme-light .user-dropdown .text-sm {
+      color: #6b7280;
+    }
+    body.theme-light .top-nav h1,
+    body.theme-light .top-nav p,
+    body.theme-light .top-nav span,
+    body.theme-light .top-nav button,
+    body.theme-light .top-nav select {
+      color: var(--text-color) !important;
+    }
+    body.theme-light .top-tab-btn.active,
+    body.theme-light .top-tab-btn.active span {
+      color: #FFFFFF !important;
+    }
+
+    .pro-table thead tr,
+    body.theme-light .pro-table thead tr {
+      background-color: #0b1220;
+    }
+    .pro-table thead th,
+    .pro-table thead th button,
+    body.theme-light .pro-table thead th,
+    body.theme-light .pro-table thead th button {
+      color: #FFFFFF !important;
+      font-weight: 600;
+    }
+
+    .pending-title,
+    body.theme-light .pending-title {
+      color: #2D3436;
+    }
+    .pending-table-wrap {
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+    }
+    .pending-header-cell {
+      color: #FFFFFF !important;
+      font-weight: 600;
+    }
+
+    .export-guide {
+      font-size: 13px;
+      color: #636e72;
+    }
+    .export-option-text {
+      color: #2D3436;
+    }
+    .export-btn {
+      background-color: var(--fpt-blue);
+      color: #FFFFFF;
+      border-radius: 0.375rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .export-btn:hover {
+      background-color: #0041a0;
+    }
+
+    .empty-state-row {
+      height: 280px;
+    }
+    .empty-state-cell {
+      text-align: center;
+      vertical-align: middle;
+      color: #636e72 !important;
+      font-weight: 500;
+    }
+
+    body.theme-light #exportSystemSelect:disabled {
+      background-color: #f3f4f6;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    body.theme-light .text-green-400,
+    body.theme-light .text-slate-400 {
+      color: var(--text-color) !important;
+    }
+    body.theme-light .text-slate-400 {
+      color: var(--text-color);
+    }
+    body.theme-light label {
+      color: var(--text-color);
+    }
+    body.theme-light label span {
+      color: var(--text-color);
+    }
     .toast-notification {
       position: fixed;
       right: 18px;
@@ -317,22 +474,22 @@
 
     <!-- Pending Terms Tab -->
     <div id="pending-tab" class="tab-pane p-8">
-      <h2 class="text-3xl font-bold mb-6" data-i18n="pendingTitle">Pending Terms for Approval</h2>
-      <div class="flex items-center gap-3 mb-4">
-        <button onclick="bulkApproveSelected()" class="bg-green-600 hover:bg-green-500" data-i18n="bulkApprove">✅ Bulk Approve</button>
-        <button onclick="refreshPendingTerms()" class="bg-sky-600 hover:bg-sky-500" data-i18n="refresh">🔄 Refresh</button>
+      <h2 class="text-3xl font-bold mb-6 pending-title" data-i18n="pendingTitle">Pending Terms for Approval</h2>
+      <div class="button-group mb-4">
+        <button onclick="bulkApproveSelected()" class="bg-green-600 hover:bg-green-500 px-4 py-3" data-i18n="bulkApprove">✅ Bulk Approve</button>
+        <button onclick="refreshPendingTerms()" class="bg-sky-600 hover:bg-sky-500 px-4 py-3" data-i18n="refresh">🔄 Refresh</button>
         <span id="pendingBulkStatus" class="text-sm text-slate-400"></span>
       </div>
-      <div class="table-wrap">
+      <div class="table-wrap pending-table-wrap">
         <table class="pro-table text-sm w-full">
           <thead>
-            <tr>
-              <th><input type="checkbox" id="pendingSelectAll" /></th>
-              <th data-i18n="colOriginalTerm">Thuật ngữ gốc</th>
-              <th data-i18n="colAiSuggestion">Kết quả AI đề xuất</th>
-              <th data-i18n="colSystem">Hệ thống</th>
-              <th>Confidence</th>
-              <th data-i18n="colAction">Hành động</th>
+            <tr class="pending-header-row">
+              <th class="pending-header-cell"><input type="checkbox" id="pendingSelectAll" /></th>
+              <th class="pending-header-cell" data-i18n="colOriginalTerm">Thuật ngữ gốc</th>
+              <th class="pending-header-cell" data-i18n="colAiSuggestion">Kết quả AI đề xuất</th>
+              <th class="pending-header-cell" data-i18n="colSystem">Hệ thống</th>
+              <th class="pending-header-cell">Confidence</th>
+              <th class="pending-header-cell" data-i18n="colAction">Hành động</th>
             </tr>
           </thead>
           <tbody id="pendingTermsList"></tbody>
@@ -353,7 +510,7 @@
           <input type="text" id="crudJapaneseRomaji" placeholder="Japanese (Romaji)" />
           <input type="text" id="crudChinese" placeholder="Chinese (Simplified)" />
           <input type="text" id="crudCategory" placeholder="Category (JSON: {key, vi, en})" />
-          <div class="flex gap-2">
+          <div class="button-group">
             <button onclick="crudOperation('create')" class="flex-1 bg-green-600 hover:bg-green-500" data-i18n="btnCreate">➕ Tạo</button>
             <button onclick="crudOperation('update')" class="flex-1 bg-yellow-600 hover:bg-yellow-500" data-i18n="btnUpdate">✏️ Sửa</button>
             <button onclick="crudOperation('delete')" class="flex-1 bg-red-600 hover:bg-red-500" data-i18n="btnDelete">🗑️ Xóa</button>
@@ -397,7 +554,7 @@
       </div>
       <div class="mt-3 flex items-center justify-between gap-3 toolbar-width-centered">
         <p id="feedbackPaginationInfo" class="text-sm text-slate-400"></p>
-        <div class="flex items-center gap-2">
+        <div class="button-group">
           <button onclick="changeFeedbackPage(-1)" class="secondary" data-i18n="prev">Prev</button>
           <button onclick="changeFeedbackPage(1)" class="secondary" data-i18n="next">Next</button>
         </div>
@@ -407,20 +564,39 @@
     <!-- Export Tab -->
     <div id="export-tab" class="tab-pane p-8">
       <h2 class="text-3xl font-bold mb-6" data-i18n="exportTitle">Export Data</h2>
-      <div class="soft-card padded panel-width-wide">
-        <p class="mb-4 text-slate-400" data-i18n="exportGuide">Xuất dữ liệu từ điển ra file CSV (Excel)</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="exportMode" value="all" checked><span data-i18n="exportAll">Xuất toàn bộ dữ liệu</span></label>
-          <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="exportMode" value="ai"><span data-i18n="exportAiOnly">Chỉ xuất thuật ngữ mới từ AI</span></label>
-          <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="exportMode" value="system"><span data-i18n="exportBySystem">Xuất theo hệ thống chuyên ngành</span></label>
-          <select id="exportSystemSelect" class="pill !mb-0">
-            <option value="engine" data-i18n="systemEngine">Engine</option>
-            <option value="chassis" data-i18n="systemChassis">Chassis</option>
-            <option value="general" data-i18n="systemGeneral">General</option>
-          </select>
+      <div class="soft-card padded panel-width-wide flex flex-col">
+        <p class="mb-6 text-sm text-gray-500 export-guide" data-i18n="exportGuide">Xuất dữ liệu từ điển ra file CSV (Excel)</p>
+        
+        <div class="flex flex-col gap-3 mb-6 flex-grow">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="exportMode" value="all" checked onchange="updateExportModeState()">
+            <span data-i18n="exportAll" class="export-option-text">Xuất toàn bộ dữ liệu</span>
+          </label>
+          
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="exportMode" value="ai" onchange="updateExportModeState()">
+            <span data-i18n="exportAiOnly" class="export-option-text">Chỉ xuất thuật ngữ mới từ AI</span>
+          </label>
+          
+          <label class="flex items-center gap-3 cursor-pointer">
+            <input type="radio" name="exportMode" value="system" onchange="updateExportModeState()">
+            <span data-i18n="exportBySystem" class="export-option-text">Xuất theo hệ thống chuyên ngành</span>
+          </label>
+          
+          <div class="ml-6 mt-2">
+            <select id="exportSystemSelect" class="pill !mb-0" disabled>
+              <option value="engine" data-i18n="systemEngine">Engine</option>
+              <option value="chassis" data-i18n="systemChassis">Chassis</option>
+              <option value="general" data-i18n="systemGeneral">General</option>
+            </select>
+          </div>
         </div>
-        <button onclick="exportDictionary()" class="bg-green-600 hover:bg-green-500 px-6 py-3 text-base font-bold" data-i18n="btnDownloadCsv">📥 Download CSV Dictionary</button>
-        <div id="exportProgressShell" class="progress-shell hidden"><div id="exportProgressFill" class="progress-fill"></div></div>
+        
+        <div id="exportProgressShell" class="progress-shell hidden mb-4"><div id="exportProgressFill" class="progress-fill"></div></div>
+        
+        <div class="flex justify-end">
+          <button onclick="exportDictionary()" class="px-6 py-3 text-base font-bold export-btn" data-i18n="btnDownloadCsv">📥 Tải CSV Dictionary</button>
+        </div>
       </div>
       <p id="exportStatus" class="text-green-400 mt-4"></p>
     </div>
@@ -837,7 +1013,7 @@
         list.innerHTML = '';
 
         if (!currentPendingTerms.length) {
-          list.innerHTML = '<tr><td colspan="6" class="text-slate-400">' + t('noPending') + '</td></tr>';
+          list.innerHTML = `<tr class="empty-state-row"><td colspan="6" class="empty-state-cell">${escapeHtml(t('noPending'))}</td></tr>`;
           return;
         }
 
@@ -850,7 +1026,7 @@
             <td class="text-slate-300">${escapeHtml(detectSystemFromTerm(term))}</td>
             <td class="text-cyan-300 font-semibold">${escapeHtml(getConfidence(term))}</td>
             <td>
-              <div class="flex gap-2">
+              <div class="button-group">
                 <button onclick="approveTerm('${escapeHtml(term.id)}', 'approve')" class="bg-green-600 hover:bg-green-500">${currentLang === 'en' ? 'Approve' : currentLang === 'ja' ? '承認' : 'Duyệt'}</button>
                 <button onclick="editPendingTerm('${escapeHtml(term.id)}')" class="bg-yellow-600 hover:bg-yellow-500">${currentLang === 'en' ? 'Edit' : currentLang === 'ja' ? '編集' : 'Sửa'}</button>
               </div>
@@ -1076,7 +1252,7 @@
       const pageItems = feedbackState.filtered.slice(start, start + feedbackState.pageSize);
 
       if (!pageItems.length) {
-        list.innerHTML = '<tr><td colspan="6" class="text-slate-400">' + t('noFeedbackMatch') + '</td></tr>';
+        list.innerHTML = `<tr class="empty-state-row"><td colspan="6" class="empty-state-cell">${escapeHtml(t('noFeedbackMatch'))}</td></tr>`;
       } else {
         list.innerHTML = '';
         pageItems.forEach((fb) => {
@@ -1103,7 +1279,7 @@
       try {
         const response = await fetch('feedback-log.json');
         if (!response.ok) {
-          document.getElementById('feedbackList').innerHTML = '<tr><td colspan="6" class="text-slate-400">' + t('noFeedback') + '</td></tr>';
+          document.getElementById('feedbackList').innerHTML = `<tr class="empty-state-row"><td colspan="6" class="empty-state-cell">${escapeHtml(t('noFeedback'))}</td></tr>`;
           return;
         }
 
@@ -1116,7 +1292,7 @@
         feedbackState.page = 1;
         renderFeedbackTable();
       } catch (error) {
-        document.getElementById('feedbackList').innerHTML = '<tr><td colspan="6" class="text-red-400">Lỗi tải feedback: ' + escapeHtml(error.message) + '</td></tr>';
+        document.getElementById('feedbackList').innerHTML = `<tr class="empty-state-row"><td colspan="6" class="empty-state-cell">Lỗi tải feedback: ${escapeHtml(error.message)}</td></tr>`;
       }
     }
 
@@ -1130,6 +1306,21 @@
           showAdminToast(currentLang === 'en' ? 'New feedback arrived.' : currentLang === 'ja' ? '新しいフィードバックがあります。' : 'Có feedback mới.');
         }
       } catch (_error) {}
+    }
+
+    function updateExportModeState() {
+      const exportSystemSelect = document.getElementById('exportSystemSelect');
+      const selectedMode = document.querySelector('input[name="exportMode"]:checked')?.value;
+      
+      if (selectedMode === 'system') {
+        exportSystemSelect.disabled = false;
+        exportSystemSelect.style.opacity = '1';
+        exportSystemSelect.style.cursor = 'pointer';
+      } else {
+        exportSystemSelect.disabled = true;
+        exportSystemSelect.style.opacity = '0.5';
+        exportSystemSelect.style.cursor = 'not-allowed';
+      }
     }
 
     async function exportDictionary() {
